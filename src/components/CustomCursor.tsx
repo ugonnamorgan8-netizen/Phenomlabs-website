@@ -6,7 +6,7 @@ export default function CustomCursor() {
   const [hovered, setHovered] = useState(false)
   const pos = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
-  const raf = useRef<number>()
+  const raf = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {

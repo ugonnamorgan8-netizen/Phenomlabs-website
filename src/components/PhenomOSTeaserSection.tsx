@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { Link } from 'react-router-dom'
-import { MessageSquare, Sparkles, Zap, Smartphone } from 'lucide-react'
+import { Sparkles, Zap, Smartphone } from 'lucide-react'
 
 const chatMessages = [
   { from: 'user', text: 'How much did I make this week?' },

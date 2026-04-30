@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Phone, Twitter, Linkedin, Github, Youtube, ArrowUpRight } from 'lucide-react'
+import { Twitter, Linkedin, Github, ArrowUpRight } from 'lucide-react'
 
 const services = [
   { label: 'PHENOM LEARN', path: '/services#learn' },

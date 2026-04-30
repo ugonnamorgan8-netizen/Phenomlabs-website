@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
-import PhenomOSTeaserSection from '../components/PhenomOSTeaserSection'
 
 const features = [
   { phase: 'Phase 1 — Core', emoji: '📊', title: 'AI Accounting & Invoicing', desc: 'Generate, send, and track invoices. Get real-time profit/loss summaries via WhatsApp.' },
