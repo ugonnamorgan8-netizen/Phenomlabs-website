@@ -6,8 +6,8 @@ export default function CTABannerSection() {
   return (
     <section className="py-40 relative overflow-hidden bg-black">
       {/* Background visual drama */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-ph-blue/5 to-black" />
-      <div className="orb w-[1000px] h-[1000px] bg-ph-blue/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-ph-violet/5 to-black" />
+      <div className="orb w-[1000px] h-[1000px] bg-ph-violet/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
       <div className="grid-pattern absolute inset-0 opacity-10" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -19,14 +19,14 @@ export default function CTABannerSection() {
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-[10px] font-mono uppercase tracking-[0.5em] text-ph-blue mb-8 block font-bold"
+            className="text-[10px] font-mono uppercase tracking-[0.5em] text-ph-violet mb-8 block font-bold"
           >
             The Future is Intelligent
           </motion.span>
           
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-12 tracking-tighter leading-[0.9] text-balance">
             Let’s Build <br />
-            <span className="gradient-text-blue">The Impossible.</span>
+            <span className="gradient-text-brand drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">The Impossible.</span>
           </h2>
           
           <p className="text-white/40 text-xl mb-16 max-w-2xl mx-auto leading-relaxed text-balance">
@@ -49,7 +49,7 @@ export default function CTABannerSection() {
               className="btn-premium-outline px-12 py-5 group"
             >
               <span className="relative z-10 flex items-center gap-3 text-base">
-                <MessageSquare size={20} className="text-ph-blue" /> Talk to an Expert
+                <MessageSquare size={20} className="text-ph-violet" /> Talk to an Expert
               </span>
             </a>
           </div>

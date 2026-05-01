@@ -1,7 +1,9 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { Canvas } from '@react-three/fiber'
+import Rocket3D from '../components/Rocket3D'
 
 const features = [
   { phase: 'Phase 1 — Core', emoji: '📊', title: 'AI Accounting & Invoicing', desc: 'Generate, send, and track invoices. Get real-time profit/loss summaries via WhatsApp.' },
@@ -19,8 +21,8 @@ const steps = [
 ]
 
 const pricing = [
-  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#0066FF', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
-  { name: 'Business', price: '₦9,999', period: '/month', color: '#6600FF', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
+  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#2563EB', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
+  { name: 'Business', price: '₦9,999', period: '/month', color: '#7C3AED', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
   { name: 'Enterprise', price: 'Custom', period: 'Contact Us', color: '#FFB800', features: ['All Business Features', 'Sales Forecasting', 'Funding Matching', 'Custom Integrations', 'Dedicated Account Manager'] },
 ]
 
@@ -52,24 +54,43 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 export default function PhenomOSPage() {
   const [email, setEmail] = useState('')
   const [joined, setJoined] = useState(false)
+  const containerRef = useRef<HTMLElement>(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+
+  const rocketProgress = useTransform(scrollYProgress, [0, 0.8], [0, 1])
+
   const { ref: stepsRef, inView: stepsInView } = useInView()
   const { ref: featRef, inView: featInView } = useInView()
   const { ref: pricingRef, inView: pricingInView } = useInView()
 
   return (
-    <main className="bg-black">
+    <main ref={containerRef} className="bg-black">
       {/* Hero */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-24">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,140,0,0.1) 0%, #000 70%)' }} />
-        <div className="grid-lines absolute inset-0 opacity-20" />
-        <div className="aurora-1 absolute inset-0" />
+      <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-24">
+        {/* Background Layers */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(124,58,237,0.15) 0%, transparent 70%)' }} />
+        <div className="grid-lines absolute inset-0 opacity-20 pointer-events-none" />
+        <div className="aurora-1 absolute inset-0 pointer-events-none" />
+
+        {/* Rocket 3D Canvas */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} intensity={1} />
+            <Rocket3D progress={rocketProgress} />
+          </Canvas>
+        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-sm font-semibold mb-6 animate-pulse">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ph-violet/30 bg-ph-violet/10 text-ph-purple text-sm font-semibold mb-6 animate-pulse">
               🚀 Launching 2026 — Join the Waitlist
             </span>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Meet Your <span className="gradient-text-gold">AI Business Manager</span>
+              Meet Your <span className="gradient-text-brand">AI Business Manager</span>
             </h1>
             <p className="text-white/60 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
               PHENOM OS is Africa's first AI-powered business operating system. Run your entire business from WhatsApp.
@@ -78,9 +99,9 @@ export default function PhenomOSPage() {
             {!joined ? (
               <form onSubmit={e => { e.preventDefault(); if (email) setJoined(true) }} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required
-                  className="flex-1 px-5 py-3.5 rounded-xl bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-amber-400/60 transition-colors" />
-                <button type="submit" className="px-7 py-3.5 rounded-xl font-bold text-black text-sm whitespace-nowrap"
-                  style={{ background: 'linear-gradient(135deg, #FFB800, #FF6600)' }}>
+                  className="flex-1 px-5 py-3.5 rounded-xl bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-ph-violet/60 transition-colors" />
+                <button type="submit" className="px-7 py-3.5 rounded-xl font-bold text-white text-sm whitespace-nowrap"
+                  style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
                   Join Waitlist →
                 </button>
               </form>
@@ -188,7 +209,7 @@ export default function PhenomOSPage() {
                 style={{ boxShadow: p.popular ? '0 0 40px rgba(102,0,255,0.15)' : undefined }}>
                 {p.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, #0066FF, #6600FF)' }}>
+                    style={{ background: 'linear-gradient(135deg, #2563EB, #7C3AED)' }}>
                     Most Popular
                   </div>
                 )}

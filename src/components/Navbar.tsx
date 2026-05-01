@@ -39,12 +39,12 @@ export default function Navbar() {
           
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group relative">
-            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all duration-500 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-ph-blue/20 to-ph-purple/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="text-xl font-bold text-white relative z-10">P</span>
+            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-ph-purple/30 transition-all duration-500 overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-ph-violet/20 to-ph-purple/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img src="/assets/logo.png" alt="Phenom Labs Logo" className="w-8 h-8 object-contain relative z-10" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tighter text-white">PHENOM<span className="text-ph-blue">LABS</span></span>
+              <span className="text-lg font-bold tracking-tighter text-white drop-shadow-[0_0_8px_rgba(124,58,237,0.3)]">Phenom <span className="text-ph-purple">Labs</span></span>
               <span className="text-[8px] font-mono tracking-[0.4em] text-white/30 uppercase -mt-1">Digital Intelligence</span>
             </div>
           </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-ph-blue group-hover:w-1/2 transition-all duration-300" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-ph-violet group-hover:w-1/2 transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -76,7 +76,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <Link 
               to="/contact" 
-              className="px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-ph-blue hover:text-white transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,102,255,0.3)]"
+              className="px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-ph-violet hover:text-white transition-all duration-500 hover:shadow-[0_0_30px_rgba(124,58,237,0.3)]"
             >
               Get Started
             </Link>
@@ -126,7 +126,7 @@ export default function Navbar() {
             <div className="mt-auto pt-8 border-t border-white/10">
               <Link 
                 to="/contact"
-                className="w-full py-5 rounded-2xl bg-ph-blue text-white font-bold text-center block text-lg"
+                className="w-full py-5 rounded-2xl bg-ph-violet text-white font-bold text-center block text-lg"
               >
                 Start a Project
               </Link>

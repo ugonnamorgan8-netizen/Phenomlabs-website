@@ -1,11 +1,9 @@
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, Globe, Trophy, Smartphone, ChevronDown } from 'lucide-react'
-import { Suspense, lazy } from 'react'
 import ParticleField from '../components/ParticleField'
-
-const NeuralNetwork3D = lazy(() => import('../components/NeuralNetwork3D'))
+import NeuralNetwork3D from '../components/NeuralNetwork3D'
 
 const wordVariants = {
   hidden: { opacity: 0, filter: 'blur(12px)', y: 20 },
@@ -20,7 +18,16 @@ const trustBadges = [
 ]
 
 export default function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null)
   const mouseRef = useRef<[number, number]>([0, 0])
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+
+  // Smooth out the scroll progress for the 3D effect
+  const scrollProgress = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   const onMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -34,7 +41,8 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      ref={containerRef}
+      className="relative min-h-[120vh] flex flex-col overflow-hidden"
       style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,40,120,0.18) 0%, #000 70%)' }}
       onMouseMove={onMouseMove}
     >
@@ -76,7 +84,7 @@ export default function HeroSection() {
                   initial="hidden"
                   animate="visible"
                   variants={wordVariants}
-                  className={li === 2 ? 'gradient-text' : ''}
+                  className={li === 2 ? 'gradient-text-brand' : ''}
                 >
                   {line}
                 </motion.div>
@@ -122,12 +130,10 @@ export default function HeroSection() {
         </div>
 
         {/* RIGHT — 3D Sphere */}
-        <div className="w-full lg:w-2/5 h-64 sm:h-80 lg:h-[500px] relative">
+        <div className="w-full lg:w-2/5 h-64 sm:h-80 lg:h-[600px] relative">
           <div className="absolute inset-0 rounded-full pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%)' }} />
-          <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-white/20 text-sm">Loading 3D...</div>}>
-            <NeuralNetwork3D mouse={mouseRef} />
-          </Suspense>
+          <NeuralNetwork3D mouse={mouseRef} scrollProgress={scrollProgress} />
         </div>
       </div>
 

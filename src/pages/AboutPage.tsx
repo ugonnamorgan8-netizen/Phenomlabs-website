@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import CTABannerSection from '../components/CTABannerSection'
 
@@ -23,19 +23,33 @@ export default function AboutPage() {
   const { ref: valuesRef, inView: valuesInView } = useInView()
   const { ref: timelineRef, inView: timelineInView } = useInView()
 
+  const { scrollYProgress } = useScroll()
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2])
+
   return (
     <main className="bg-black">
       {/* Hero */}
-      <section className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,60,180,0.14) 0%, #000 70%)' }} />
-        <div className="dot-grid absolute inset-0 opacity-30" />
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-24 pb-20">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <motion.img 
+            src="/assets/africa_ai_network.png" 
+            alt="3D Africa AI Network" 
+            style={{ y, scale }}
+            className="w-full h-[120%] object-cover opacity-40 blur-[2px]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-ph-blue text-sm font-semibold tracking-widest uppercase mb-3">About Us</p>
-            <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4">
-              Africa's <span className="gradient-text">AI Company</span>
+          <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-violet border border-ph-violet/30 bg-ph-violet/10 mb-6 uppercase tracking-widest">
+              About Us
+            </span>
+            <h1 className="font-display text-6xl sm:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">
+              Africa's <span className="gradient-text-brand">AI Company</span>
             </h1>
-            <p className="text-white/55 text-xl max-w-2xl mx-auto">
+            <p className="text-white/70 text-2xl max-w-2xl mx-auto font-light">
               Built in Awka, Anambra State. Designed for the World.
             </p>
           </motion.div>
@@ -47,7 +61,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <p className="text-ph-blue text-sm font-semibold tracking-widest uppercase mb-3">Our Story</p>
+              <p className="text-ph-violet text-sm font-semibold tracking-widest uppercase mb-3">Our Story</p>
               <h2 className="font-display text-4xl font-bold text-white mb-6">
                 Built from Ambition, Driven by Purpose
               </h2>
@@ -66,8 +80,8 @@ export default function AboutPage() {
                   { label: 'Service Areas', value: 'Nigeria + Africa' },
                   { label: 'Response Time', value: '< 1 Hour' },
                 ].map(s => (
-                  <div key={s.label} className="glass rounded-xl p-5 border border-white/8 text-center">
-                    <div className="font-display font-black text-3xl gradient-text mb-1">{s.value}</div>
+                  <div key={s.label} className="glass rounded-xl p-5 border border-white/8 text-center hover:-translate-y-1 transition-transform duration-300">
+                    <div className="font-display font-black text-3xl gradient-text-brand mb-1">{s.value}</div>
                     <p className="text-white/50 text-sm">{s.label}</p>
                   </div>
                 ))}
@@ -81,19 +95,19 @@ export default function AboutPage() {
       <section className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-ph-blue text-sm font-semibold tracking-widest uppercase mb-3">The Team</p>
-            <h2 className="font-display text-4xl font-bold text-white">Meet the <span className="gradient-text">Founder</span></h2>
+            <p className="text-ph-violet text-sm font-semibold tracking-widest uppercase mb-3">The Team</p>
+            <h2 className="font-display text-4xl font-bold text-white">Meet the <span className="gradient-text-brand">Founder</span></h2>
           </div>
           <div className="max-w-2xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="glass rounded-2xl p-8 border border-white/8 text-center card-hover-glow">
               {/* Avatar */}
               <div className="w-28 h-28 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl font-black text-white"
-                style={{ background: 'linear-gradient(135deg, #0066FF, #6600FF)' }}>
+                style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
                 M
               </div>
               <h3 className="font-display font-bold text-white text-2xl mb-1">Morgan Ugonna Thankgod</h3>
-              <p className="gradient-text font-semibold mb-4">Founder & CEO, PHENOM LABS</p>
+              <p className="gradient-text-brand font-semibold mb-4">Founder & CEO, PHENOM LABS</p>
               <p className="text-white/50 text-sm mb-2">AI Automation Engineer · Prompt Engineer · Front-End Developer</p>
               <p className="text-white/40 text-xs mb-6 font-mono">📍 Awka, Anambra State, Nigeria</p>
               <p className="text-white/60 text-sm leading-relaxed mb-6">
@@ -102,7 +116,7 @@ export default function AboutPage() {
               {/* Skills */}
               <div className="flex flex-wrap gap-2 justify-center">
                 {skills.map(s => (
-                  <span key={s} className="text-xs px-3 py-1 rounded-full bg-ph-blue/10 border border-ph-blue/20 text-ph-blue">{s}</span>
+                  <span key={s} className="text-xs px-3 py-1 rounded-full bg-ph-violet/10 border border-ph-violet/30 text-ph-violet">{s}</span>
                 ))}
               </div>
             </motion.div>
@@ -113,16 +127,16 @@ export default function AboutPage() {
       {/* Timeline */}
       <section ref={timelineRef} className="py-20" style={{ background: '#050510' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-4xl font-bold text-white text-center mb-12">Our <span className="gradient-text">Journey</span></h2>
+          <h2 className="font-display text-4xl font-bold text-white text-center mb-12">Our <span className="gradient-text-brand">Journey</span></h2>
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px" style={{ background: 'linear-gradient(180deg, #0066FF, #6600FF)' }} />
+            <div className="absolute left-6 top-0 bottom-0 w-px" style={{ background: 'linear-gradient(180deg, #7C3AED, #A855F7)' }} />
             <div className="space-y-8">
               {timeline.map((t, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={timelineInView ? { opacity: 1, x: 0 } : {}} transition={{ delay: i * 0.12 }}
-                  className="flex gap-6 pl-14 relative">
-                  <div className="absolute left-[17px] top-1.5 w-3 h-3 rounded-full border-2 border-ph-blue bg-black" />
+                  className="flex gap-6 pl-14 relative group hover:scale-[1.02] transition-transform">
+                  <div className="absolute left-[17px] top-1.5 w-3 h-3 rounded-full border-2 border-ph-violet bg-black shadow-[0_0_10px_rgba(124,58,237,0.5)]" />
                   <div>
-                    <span className="text-xs font-mono text-ph-blue font-bold">{t.year}</span>
+                    <span className="text-xs font-mono text-ph-violet font-bold">{t.year}</span>
                     <p className="text-white/65 text-sm mt-1 leading-relaxed">{t.event}</p>
                   </div>
                 </motion.div>
@@ -135,7 +149,7 @@ export default function AboutPage() {
       {/* Values */}
       <section ref={valuesRef} className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-4xl font-bold text-white text-center mb-12">Our <span className="gradient-text">Values</span></h2>
+          <h2 className="font-display text-4xl font-bold text-white text-center mb-12">Our <span className="gradient-text-brand">Values</span></h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {values.map((v, i) => (
               <motion.div key={v.title} initial={{ opacity: 0, y: 25 }} animate={valuesInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1 }}

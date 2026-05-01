@@ -138,6 +138,13 @@ h1, h2, h3, h4 {
   color: transparent;
 }
 
+.gradient-text-brand {
+  background: linear-gradient(135deg, #7C3AED, #D946EF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ── Advanced Borders & Glows ── */
 .border-gradient {
   position: relative;
@@ -189,6 +196,36 @@ h1, h2, h3, h4 {
 
 .animate-float-slow {
   animation: float-slow 20s ease-in-out infinite;
+}
+
+/* ── Aurora & Techy Elements ── */
+.aurora-1 {
+  background: radial-gradient(circle at 20% 30%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
+  filter: blur(80px);
+  animation: aurora-move 15s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+  background: radial-gradient(circle at 80% 70%, rgba(102, 0, 255, 0.12) 0%, transparent 50%);
+  filter: blur(100px);
+  animation: aurora-move 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes aurora-move {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.grid-lines {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100px 100px;
 }
 
 /* ── Premium Buttons ── */

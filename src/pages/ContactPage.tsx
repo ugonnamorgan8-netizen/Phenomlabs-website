@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Mail, MapPin, Phone, MessageCircle, Clock, Check } from 'lucide-react'
 
 const services = ['AI Literacy Training', 'Prompt Engineering Workshop', 'Python Automation', 'Web Development', 'Workflow Automation', 'PHENOM OS Waitlist', 'General Enquiry']
@@ -20,17 +20,33 @@ export default function ContactPage() {
     setSubmitted(true)
   }
 
+  const { scrollYProgress } = useScroll()
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3])
+
   return (
     <main className="bg-black">
       {/* Hero */}
-      <section className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,60,180,0.14) 0%, #000 70%)' }} />
-        <div className="dot-grid absolute inset-0 opacity-30" />
+      <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden pt-36 pb-20 perspective-[1000px]">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <motion.img 
+            src="/assets/africa_ai_network.png" 
+            alt="3D Background" 
+            style={{ y, scale }}
+            className="w-full h-[120%] object-cover opacity-20 mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-black/90 to-black/50" />
+        </div>
+        <div className="dot-grid absolute inset-0 opacity-20 z-0 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-ph-blue text-sm font-semibold tracking-widest uppercase mb-3">Get In Touch</p>
-            <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4">Let's <span className="gradient-text">Work Together</span></h1>
-            <p className="text-white/55 text-xl max-w-xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-violet border border-ph-violet/30 bg-ph-violet/10 mb-6 uppercase tracking-widest">
+              Get In Touch
+            </span>
+            <h1 className="font-display text-6xl sm:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">
+              Let's <span className="gradient-text-brand">Work Together</span>
+            </h1>
+            <p className="text-white/70 text-2xl max-w-xl mx-auto font-light">
               Tell us about your project. We respond within 1 hour on business days.
             </p>
           </motion.div>
@@ -75,9 +91,9 @@ export default function ContactPage() {
                     { Icon: Phone, label: 'Phone / WhatsApp', value: '+234 708 7686 794', href: 'tel:+2347087686794' },
                     { Icon: MapPin, label: 'Location', value: 'Awka, Anambra State, Nigeria', href: '#' },
                   ].map(({ Icon, label, value, href }) => (
-                    <a key={label} href={href} className="flex items-start gap-4 p-4 rounded-xl glass border border-white/8 hover:border-ph-blue/30 transition-colors group">
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(0,102,255,0.15)' }}>
-                        <Icon size={16} className="text-ph-blue" />
+                    <a key={label} href={href} className="flex items-start gap-4 p-4 rounded-xl glass border border-white/8 hover:border-ph-purple/50 hover:-translate-y-1 transition-all duration-300 group shadow-[0_0_15px_rgba(124,58,237,0.1)] hover:shadow-[0_0_25px_rgba(124,58,237,0.3)]">
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(124,58,237,0.15)' }}>
+                        <Icon size={16} className="text-ph-violet" />
                       </div>
                       <div>
                         <p className="text-white/40 text-xs mb-0.5">{label}</p>
@@ -118,7 +134,7 @@ export default function ContactPage() {
                             <input name={f.name} type={f.type} placeholder={f.placeholder} required
                               value={form[f.name as keyof typeof form]}
                               onChange={handleChange}
-                              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-blue/50 transition-colors" />
+                              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-violet/60 transition-all shadow-inner focus:shadow-[0_0_20px_rgba(124,58,237,0.2)]" />
                           </div>
                         ))}
                       </div>
@@ -127,13 +143,13 @@ export default function ContactPage() {
                         <label className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-2 block">Organization Name</label>
                         <input name="org" type="text" placeholder="Company / School / Hospital name"
                           value={form.org} onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-blue/50 transition-colors" />
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-violet/60 transition-all shadow-inner focus:shadow-[0_0_20px_rgba(124,58,237,0.2)]" />
                       </div>
 
                       <div>
                         <label className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-2 block">Service Interested In</label>
                         <select name="service" value={form.service} onChange={handleChange} required
-                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-ph-blue/50 transition-colors appearance-none"
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-ph-violet/60 transition-all shadow-inner focus:shadow-[0_0_20px_rgba(124,58,237,0.2)] appearance-none"
                           style={{ background: 'rgba(255,255,255,0.05)' }}>
                           <option value="" disabled>Select a service...</option>
                           {services.map(s => <option key={s} value={s} className="bg-gray-900">{s}</option>)}
@@ -144,11 +160,12 @@ export default function ContactPage() {
                         <label className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-2 block">Message</label>
                         <textarea name="message" rows={5} placeholder="Tell us about your project, goals, and timeline..." required
                           value={form.message} onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-blue/50 transition-colors resize-none" />
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-ph-violet/60 transition-all shadow-inner focus:shadow-[0_0_20px_rgba(124,58,237,0.2)] resize-none" />
                       </div>
 
                       <button type="submit" disabled={loading}
-                        className="w-full py-4 rounded-xl font-bold text-white text-sm btn-primary relative overflow-hidden disabled:opacity-60">
+                        className="w-full py-4 rounded-xl font-bold text-white text-sm transition-transform hover:scale-[1.02] relative overflow-hidden disabled:opacity-60 shadow-[0_0_30px_rgba(124,58,237,0.3)] hover:shadow-[0_0_40px_rgba(124,58,237,0.5)]"
+                        style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
                         {loading ? (
                           <span className="flex items-center justify-center gap-2">
                             <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
@@ -162,7 +179,7 @@ export default function ContactPage() {
                 ) : (
                   <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
                     <div className="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center"
-                      style={{ background: 'linear-gradient(135deg, #0066FF, #6600FF)' }}>
+                      style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
                       <Check size={28} className="text-white" />
                     </div>
                     <h3 className="font-display font-bold text-white text-2xl mb-2">Message Sent!</h3>

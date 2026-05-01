@@ -8,10 +8,11 @@ export default {
     extend: {
       colors: {
         'ph-black': '#000000',
-        'ph-space': '#050510',
-        'ph-card': '#0A0A1A',
-        'ph-blue': '#0066FF',
-        'ph-purple': '#6600FF',
+        'ph-space': '#030308',
+        'ph-card': '#0A0A1F',
+        'ph-blue': '#2563EB',
+        'ph-purple': '#7C3AED',
+        'ph-violet': '#A855F7',
         'ph-gold': '#FFB800',
         'ph-text': '#FFFFFF',
         'ph-muted': '#A0A0B0',
@@ -23,7 +24,8 @@ export default {
         'mono': ['JetBrains Mono', 'monospace'],
       },
       backgroundImage: {
-        'gradient-ph': 'linear-gradient(135deg, #0066FF, #6600FF)',
+        'gradient-ph': 'linear-gradient(135deg, #2563EB, #7C3AED)',
+        'gradient-brand': 'linear-gradient(135deg, #7C3AED, #D946EF)',
         'gradient-ph-gold': 'linear-gradient(135deg, #FFB800, #FF6600)',
       },
       animation: {

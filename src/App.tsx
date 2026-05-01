@@ -19,6 +19,7 @@ import WhatsAppButton from './components/WhatsAppButton'
 import ScrollToTop from './components/ScrollToTop'
 import WaitlistPopup from './components/WaitlistPopup'
 import EasterEgg from './components/EasterEgg'
+import TechBackground from './components/TechBackground'
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   return (
@@ -61,6 +62,7 @@ function App() {
   return (
     <Router>
       <div className="noise-overlay" />
+      <TechBackground />
       <CustomCursor />
       <EasterEgg />
       {loading ? (

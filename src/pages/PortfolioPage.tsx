@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import CTABannerSection from '../components/CTABannerSection'
 
@@ -42,12 +42,39 @@ const projects = [
 const filters = ['All', 'Automation', 'Web Development', 'AI Systems']
 
 function ProjectCard({ project, inView, i }: { project: typeof projects[0]; inView: boolean; i: number }) {
+  // 3D Tilt Effect
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 })
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 })
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: i * 0.12, duration: 0.6 }}
-      className="glass rounded-2xl overflow-hidden border border-white/8 card-hover-glow hover:-translate-y-2 transition-all duration-300 group"
+      style={{ rotateX, rotateY, perspective: 1000 }}
+      onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
+      className="glass rounded-2xl overflow-hidden border border-white/8 card-hover-glow hover:-translate-y-2 transition-all duration-300 group transform-gpu"
     >
       {/* Header banner */}
       <div className="h-48 relative overflow-hidden"
@@ -106,19 +133,34 @@ export default function PortfolioPage() {
 
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active)
 
+  const { scrollYProgress } = useScroll()
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3])
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 15])
+
   return (
     <main className="bg-black">
       {/* Hero */}
-      <section className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(102,0,255,0.12) 0%, #000 70%)' }} />
-        <div className="dot-grid absolute inset-0 opacity-30" />
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-36 pb-20 perspective-[1000px]">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <motion.img 
+            src="/assets/phenom_future_ui.png" 
+            alt="3D Future UI" 
+            style={{ y, scale, rotateX }}
+            className="w-full h-[120%] object-cover opacity-60 mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-black/80 to-transparent" />
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-ph-purple text-sm font-semibold tracking-widest uppercase mb-3">Our Work</p>
-            <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4">
-              Real Work. <span className="gradient-text">Real Results.</span>
+          <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-violet border border-ph-violet/30 bg-ph-violet/10 mb-6 uppercase tracking-widest">
+              Our Work
+            </span>
+            <h1 className="font-display text-6xl sm:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">
+              Real Work. <span className="gradient-text-brand">Real Results.</span>
             </h1>
-            <p className="text-white/55 text-xl max-w-2xl mx-auto">
+            <p className="text-white/70 text-2xl max-w-2xl mx-auto font-light">
               Every project we deliver solves a real African business problem with precision-built AI solutions.
             </p>
           </motion.div>

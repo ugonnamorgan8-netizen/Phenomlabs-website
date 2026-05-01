@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import CTABannerSection from '../components/CTABannerSection'
+import ParticleVortex3D from '../components/ParticleVortex3D'
+
 
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
@@ -33,75 +35,121 @@ const buildServices = [
 
 function ServiceCard({ name, desc, price, color }: { name: string; desc: string; price: string; color: string }) {
   const { ref, inView } = useInView()
+  
+  // 3D Tilt Effect
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 })
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 })
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      className="glass rounded-xl p-6 border border-white/8 card-hover-glow hover:-translate-y-1 transition-transform duration-300">
-      <h3 className="font-display font-bold text-white text-lg mb-2">{name}</h3>
-      <p className="text-white/55 text-sm leading-relaxed mb-4">{desc}</p>
-      <span className="text-sm font-semibold px-3 py-1 rounded-full border" style={{ color, borderColor: `${color}40`, background: `${color}15` }}>
-        {price}
-      </span>
+    <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      style={{ rotateX, rotateY, perspective: 1000 }}
+      onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
+      className="glass rounded-xl p-8 border border-white/10 card-hover-glow transition-all duration-300 relative overflow-hidden group">
+      
+      {/* Dynamic Hover Glow Background */}
+      <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at center, ${color}20 0%, transparent 70%)`
+        }}
+      />
+      
+      <div className="relative z-10 transform-gpu" style={{ transform: "translateZ(30px)" }}>
+        <h3 className="font-display font-bold text-white text-xl mb-3">{name}</h3>
+        <p className="text-white/60 text-sm leading-relaxed mb-6">{desc}</p>
+        <span className="text-sm font-semibold px-4 py-1.5 rounded-full border shadow-[0_0_15px_rgba(0,0,0,0.5)]" style={{ color, borderColor: `${color}40`, background: `${color}15` }}>
+          {price}
+        </span>
+      </div>
     </motion.div>
   )
 }
 
+
 export default function ServicesPage() {
   return (
-    <main className="bg-black">
-      <PageHero title="Our Services" subtitle="From AI education to full automation systems — everything your organization needs to thrive with AI." />
+    <main className="bg-black relative min-h-screen">
+      {/* 3D Global Background */}
+      <ParticleVortex3D />
 
-      {/* PHENOM LEARN */}
-      <section id="learn" className="py-20" style={{ background: '#050510' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(0,102,255,0.15)', border: '1px solid rgba(0,102,255,0.2)' }}>🎓</div>
-            <div>
-              <h2 className="font-display text-3xl font-bold text-white">PHENOM LEARN</h2>
-              <p className="text-ph-blue text-sm mt-0.5">AI Education and Training</p>
+      <div className="relative z-10">
+        <PageHero title="Our Services" subtitle="From AI education to full automation systems — everything your organization needs to thrive with AI." />
+
+        {/* PHENOM LEARN */}
+        <section id="learn" className="py-20 relative bg-black/40 backdrop-blur-md border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-4 mb-12">
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.2)' }}>🎓</div>
+              <div>
+                <h2 className="font-display text-3xl font-bold text-white">PHENOM LEARN</h2>
+                <p className="text-ph-purple text-sm mt-0.5">AI Education and Training</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-[1000px]">
+              {learnServices.map(s => <ServiceCard key={s.name} {...s} color="#7C3AED" />)}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {learnServices.map(s => <ServiceCard key={s.name} {...s} color="#0066FF" />)}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* PHENOM BUILD */}
-      <section id="build" className="py-20 bg-black">
+        {/* PHENOM BUILD */}
+        <section id="build" className="py-20 relative bg-transparent">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-12">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(102,0,255,0.15)', border: '1px solid rgba(102,0,255,0.2)' }}>⚙️</div>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(168,85,247,0.15)', border: '1px solid rgba(168,85,247,0.2)' }}>⚙️</div>
             <div>
               <h2 className="font-display text-3xl font-bold text-white">PHENOM BUILD</h2>
-              <p className="text-ph-purple text-sm mt-0.5">AI Automation and Development</p>
+              <p className="text-ph-violet text-sm mt-0.5">AI Automation and Development</p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {buildServices.map(s => <ServiceCard key={s.name} {...s} color="#6600FF" />)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-[1000px]">
+            {buildServices.map(s => <ServiceCard key={s.name} {...s} color="#A855F7" />)}
           </div>
         </div>
       </section>
 
       {/* PHENOM OS Preview */}
-      <section className="py-20" style={{ background: '#050510' }}>
+      <section className="py-20 relative bg-black/60 backdrop-blur-lg border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl p-10 text-center relative overflow-hidden border border-amber-500/20"
-            style={{ background: 'linear-gradient(135deg, rgba(255,184,0,0.08) 0%, rgba(255,100,0,0.05) 100%)' }}>
+          <div className="rounded-2xl p-12 text-center relative overflow-hidden border border-ph-violet/20 shadow-[0_0_50px_rgba(124,58,237,0.1)]"
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.02) 100%)' }}>
             <div className="absolute inset-0 grid-lines opacity-10" />
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold text-amber-400 border border-amber-400/40 bg-amber-400/10 mb-4 animate-pulse">COMING 2026</span>
-            <div className="text-4xl mb-4">🧠</div>
-            <h2 className="font-display text-3xl font-bold text-white mb-3">PHENOM OS</h2>
-            <p className="text-amber-400 mb-4">Africa's First AI Business Operating System</p>
-            <p className="text-white/55 max-w-xl mx-auto mb-8">AI Accounting, WhatsApp Intelligence, Customer Automation, and Business Planning — all in one system built for African SMEs.</p>
-            <a href="/phenom-os" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-black text-sm"
-              style={{ background: 'linear-gradient(135deg, #FFB800, #FF6600)' }}>
-              Learn More & Join Waitlist →
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-purple border border-ph-violet/40 bg-ph-violet/10 mb-6 animate-pulse">COMING 2026</span>
+            <div className="text-5xl mb-6 transform hover:scale-110 transition-transform cursor-pointer">🧠</div>
+            <h2 className="font-display text-4xl font-bold text-white mb-4">PHENOM OS</h2>
+            <p className="text-ph-violet font-semibold tracking-wide uppercase text-sm mb-6">Africa's First AI Business Operating System</p>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">AI Accounting, WhatsApp Intelligence, Customer Automation, and Business Planning — all in one powerful system built for African SMEs.</p>
+            <a href="/phenom-os" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-sm hover:scale-105 transition-transform"
+              style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+              Experience the Future →
             </a>
           </div>
         </div>
       </section>
 
       <CTABannerSection />
+      </div>
     </main>
   )
 }
+
