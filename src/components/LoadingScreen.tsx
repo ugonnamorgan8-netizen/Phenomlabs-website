@@ -37,7 +37,7 @@ export default function LoadingScreen({ onComplete }: Props) {
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%)' }} />
+            <div className="w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
           </div>
 
           {/* SVG Logo */}
@@ -50,13 +50,13 @@ export default function LoadingScreen({ onComplete }: Props) {
                 strokeDasharray="346" strokeDashoffset="346"
                 style={{ animation: 'draw 1.5s ease forwards 0.2s' }}
               />
-              {/* P letter */}
+              {/* P + L geometric logo */}
               <path
-                d="M38 30 L38 90 M38 30 L65 30 Q82 30 82 52 Q82 74 65 74 L38 74"
+                d="M30 20 V80 M30 20 H60 Q75 20 75 32.5 Q75 45 60 45 H30 M45 45 L75 80"
                 stroke="url(#logoGrad)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
                 fill="none"
-                strokeDasharray="200" strokeDashoffset="200"
-                style={{ animation: 'draw 1.2s ease forwards 0.5s' }}
+                strokeDasharray="300" strokeDashoffset="300"
+                style={{ animation: 'draw 1.5s ease forwards 0.5s' }}
               />
               {/* Inner glow dot */}
               <circle cx="60" cy="52" r="6" fill="url(#logoGrad)" opacity="0">
@@ -65,8 +65,8 @@ export default function LoadingScreen({ onComplete }: Props) {
               </circle>
               <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#0066FF" />
-                  <stop offset="100%" stopColor="#6600FF" />
+                  <stop offset="0%" stopColor="#a78bfa" />
+                  <stop offset="100%" stopColor="#7c3aed" />
                 </linearGradient>
               </defs>
             </svg>
@@ -89,7 +89,7 @@ export default function LoadingScreen({ onComplete }: Props) {
             <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, #0066FF, #6600FF)', width: `${progress}%` }}
+                style={{ background: 'linear-gradient(90deg, #a78bfa, #7c3aed)', width: `${progress}%` }}
                 transition={{ ease: 'easeOut' }}
               />
             </div>

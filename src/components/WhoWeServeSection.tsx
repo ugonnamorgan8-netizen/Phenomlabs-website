@@ -2,35 +2,35 @@ import { motion } from 'framer-motion'
 import { GraduationCap, Briefcase, HeartPulse, Building2, Rocket, Globe } from 'lucide-react'
 
 const industries = [
-  { 
-    icon: <GraduationCap className="text-ph-blue" size={24} />, 
-    label: 'Education', 
-    desc: 'Empowering institutions with AI literacy and smart student management.' 
+  {
+    icon: <GraduationCap size={22} />,
+    label: 'Education',
+    desc: 'Empowering institutions with AI literacy and smart student management.'
   },
-  { 
-    icon: <Briefcase className="text-ph-purple" size={24} />, 
-    label: 'Corporate', 
-    desc: 'Streamlining operations and decision-making through bespoke automation.' 
+  {
+    icon: <Briefcase size={22} />,
+    label: 'Corporate',
+    desc: 'Streamlining operations and decision-making through bespoke automation.'
   },
-  { 
-    icon: <HeartPulse className="text-ph-blue-light" size={24} />, 
-    label: 'Healthcare', 
-    desc: 'Leveraging AI for predictive diagnostics and efficient patient care data.' 
+  {
+    icon: <HeartPulse size={22} />,
+    label: 'Healthcare',
+    desc: 'Leveraging AI for predictive diagnostics and efficient patient care data.'
   },
-  { 
-    icon: <Building2 className="text-ph-gold" size={24} />, 
-    label: 'Public Sector', 
-    desc: 'Modernizing governance with intelligent process and data automation.' 
+  {
+    icon: <Building2 size={22} />,
+    label: 'Public Sector',
+    desc: 'Modernizing governance with intelligent process and data automation.'
   },
-  { 
-    icon: <Rocket className="text-ph-blue" size={24} />, 
-    label: 'Startups', 
-    desc: 'Accelerating product cycles with AI-first engineering and tooling.' 
+  {
+    icon: <Rocket size={22} />,
+    label: 'Startups',
+    desc: 'Accelerating product cycles with AI-first engineering and tooling.'
   },
-  { 
-    icon: <Globe className="text-ph-purple" size={24} />, 
-    label: 'Pan-African', 
-    desc: 'Building cross-border solutions for the continent’s unique challenges.' 
+  {
+    icon: <Globe size={22} />,
+    label: 'Pan-African',
+    desc: "Building cross-border solutions for the continent's unique challenges."
   },
 ]
 
@@ -43,53 +43,61 @@ export default function WhoWeServeSection() {
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-[10px] font-mono uppercase tracking-[0.4em] text-ph-blue mb-4 block"
+              viewport={{ once: true }}
+              className="inline-block mb-5 tag-purple"
             >
               Strategic Sectors
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold text-white tracking-tighter"
+              className="text-4xl sm:text-5xl font-bold text-white"
+              style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}
             >
-              Intelligence For <span className="gradient-text-blue">Every Domain</span>
+              Intelligence For <span className="gradient-text-purple">Every Domain</span>
             </motion.h2>
           </div>
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-white/40 max-w-xs text-sm font-mono uppercase tracking-widest leading-relaxed"
+            viewport={{ once: true }}
+            className="text-white/35 max-w-xs text-sm leading-relaxed"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             We deploy tactical AI across diverse ecosystems to drive continental growth.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
           {industries.map((item, i) => (
             <motion.div
               key={item.label}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: i * 0.06 }}
               viewport={{ once: true }}
-              className="group p-10 border border-white/5 hover:bg-white/[0.02] transition-all duration-500 relative overflow-hidden"
+              className="group p-9 bg-black hover:bg-white/[0.02] transition-all duration-400 relative overflow-hidden"
             >
-              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ph-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-ph-blue/10 transition-colors duration-500">
-                {item.icon}
+              {/* Top accent line on hover */}
+              <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-ph-purple/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-7 transition-colors duration-400"
+                style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.12)' }}>
+                <span className="text-ph-purple-light">{item.icon}</span>
               </div>
-              
-              <h3 className="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-ph-blue transition-colors">
+
+              <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-ph-purple-light transition-colors"
+                style={{ fontFamily: 'Sora, sans-serif' }}>
                 {item.label}
               </h3>
-              
-              <p className="text-white/40 text-sm leading-relaxed max-w-[240px]">
+
+              <p className="text-white/38 text-sm leading-relaxed max-w-[240px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                 {item.desc}
               </p>
-              
-              <div className="absolute bottom-8 right-8 text-[10px] font-mono text-white/10 group-hover:text-ph-blue/40 transition-colors">
+
+              <div className="absolute bottom-7 right-7 text-[10px] font-mono text-white/8 group-hover:text-ph-purple/25 transition-colors">
                 {String(i + 1).padStart(2, '0')}
               </div>
             </motion.div>

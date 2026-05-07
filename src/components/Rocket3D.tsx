@@ -44,10 +44,10 @@ function RocketModel() {
       </mesh>
 
       {/* Engine Glow */}
-      <pointLight position={[0, -1, 0]} intensity={2} color="#FF6600" />
+      <pointLight position={[0, -1, 0]} intensity={2} color="#7C3AED" />
       <mesh position={[0, -0.9, 0]}>
         <sphereGeometry args={[0.15, 16, 16]} />
-        <meshBasicMaterial color="#FFB800" />
+        <meshBasicMaterial color="#A855F7" />
       </mesh>
 
       {/* Exhaust Particles */}
@@ -57,7 +57,7 @@ function RocketModel() {
         size={2}
         speed={3}
         opacity={0.8}
-        color="#FFB800"
+        color="#A855F7"
         position={[0, -1.5, 0]}
       />
     </group>

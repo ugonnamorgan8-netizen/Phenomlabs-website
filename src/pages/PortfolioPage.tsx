@@ -12,7 +12,7 @@ const projects = [
     problem: 'Staff spent 2–3 hours daily manually checking and filing FRSC training records across multiple spreadsheets.',
     result: 'Full automation reduced daily compliance work to under 5 minutes with zero human error.',
     tech: ['Python', 'Playwright', 'Automation', 'FRSC API'],
-    color: '#0066FF',
+    color: '#a78bfa',
     stat: { label: 'Time Saved Daily', value: '95%' },
   },
   {
@@ -23,7 +23,7 @@ const projects = [
     problem: 'Patients in rural Abia communities lacked access to consistent healthcare due to geographic and infrastructure barriers.',
     result: 'Digital platform enabling remote consultations, cutting patient wait times and expanding healthcare reach significantly.',
     tech: ['React', 'Node.js', 'PostgreSQL', 'AI Integration'],
-    color: '#6600FF',
+    color: '#7c3aed',
     stat: { label: 'Healthcare Reach', value: '10x' },
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     problem: 'School administration was entirely paper-based — enrollment, fees, and records were scattered across physical files.',
     result: 'All school operations centralized into one digital platform, eliminating paperwork and improving data accuracy.',
     tech: ['React', 'Express', 'MySQL', 'PDF Generation'],
-    color: '#FFB800',
+    color: '#4c1d95',
     stat: { label: 'Admin Efficiency', value: '80%↑' },
   },
 ]
@@ -87,39 +87,39 @@ function ProjectCard({ project, inView, i }: { project: typeof projects[0]; inVi
         </div>
         {/* Stat badge */}
         <div className="absolute top-4 right-4 px-3 py-1.5 rounded-lg glass border border-white/10">
-          <p className="text-xs text-white/40 mb-0.5">{project.stat.label}</p>
+          <p className="text-[10px] text-white/40 mb-0.5 font-bold uppercase tracking-widest">{project.stat.label}</p>
           <p className="font-display font-bold text-lg" style={{ color: project.color }}>{project.stat.value}</p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px"
           style={{ background: `linear-gradient(90deg, transparent, ${project.color}60, transparent)` }} />
       </div>
 
-      <div className="p-7">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-mono px-2.5 py-1 rounded-md border"
+      <div className="p-8">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-[10px] font-mono px-3 py-1 rounded-full border uppercase tracking-widest font-bold"
             style={{ color: project.color, borderColor: `${project.color}40`, background: `${project.color}12` }}>
             {project.tag}
           </span>
         </div>
-        <h3 className="font-display font-bold text-white text-xl mb-3">{project.title}</h3>
-        <p className="text-white/55 text-sm leading-relaxed mb-5">{project.description}</p>
+        <h3 className="font-display font-bold text-white text-xl mb-4 leading-snug" style={{ fontFamily: 'Sora, sans-serif' }}>{project.title}</h3>
+        <p className="text-white/45 text-sm leading-relaxed mb-6" style={{ fontFamily: 'DM Sans, sans-serif' }}>{project.description}</p>
 
         {/* Problem / Result */}
-        <div className="space-y-3 mb-5">
-          <div className="p-3 rounded-lg bg-red-500/8 border border-red-500/15">
-            <p className="text-xs text-red-400/70 font-semibold mb-1">THE PROBLEM</p>
-            <p className="text-white/60 text-xs leading-relaxed">{project.problem}</p>
+        <div className="space-y-3 mb-6">
+          <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+            <p className="text-[10px] text-white/30 font-bold mb-2 uppercase tracking-[0.2em]">THE CHALLENGE</p>
+            <p className="text-white/60 text-xs leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{project.problem}</p>
           </div>
-          <div className="p-3 rounded-lg bg-green-500/8 border border-green-500/15">
-            <p className="text-xs text-green-400/70 font-semibold mb-1">THE RESULT</p>
-            <p className="text-white/60 text-xs leading-relaxed">{project.result}</p>
+          <div className="p-4 rounded-xl bg-ph-purple/5 border border-ph-purple/10">
+            <p className="text-[10px] text-ph-purple-light/50 font-bold mb-2 uppercase tracking-[0.2em]">THE OUTCOME</p>
+            <p className="text-white/70 text-xs leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{project.result}</p>
           </div>
         </div>
 
         {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {project.tech.map(t => (
-            <span key={t} className="text-xs px-2 py-0.5 rounded bg-white/5 border border-white/8 text-white/50">{t}</span>
+            <span key={t} className="text-[10px] px-2.5 py-1 rounded-md bg-white/5 border border-white/8 text-white/40 font-medium uppercase tracking-wider">{t}</span>
           ))}
         </div>
       </div>
@@ -134,33 +134,36 @@ export default function PortfolioPage() {
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active)
 
   const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3])
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 15])
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2])
 
   return (
     <main className="bg-black">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-36 pb-20 perspective-[1000px]">
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden pt-36 pb-20">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <motion.img 
-            src="/assets/phenom_future_ui.png" 
-            alt="3D Future UI" 
-            style={{ y, scale, rotateX }}
-            className="w-full h-[120%] object-cover opacity-60 mix-blend-screen"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-black/80 to-transparent" />
+          <motion.div 
+            style={{ y, scale }}
+            className="w-full h-full opacity-30"
+          >
+            {/* Human-designed abstract background pattern */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(124,58,237,0.1)_0%,transparent_50%),radial-gradient(circle_at_30%_80%,rgba(168,85,247,0.1)_0%,transparent_50%)]" />
+            <div className="dot-grid absolute inset-0 opacity-40" />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(124,58,237,0.08) 0%, transparent 70%)' }} />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-violet border border-ph-violet/30 bg-ph-violet/10 mb-6 uppercase tracking-widest">
-              Our Work
-            </span>
-            <h1 className="font-display text-6xl sm:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">
-              Real Work. <span className="gradient-text-brand">Real Results.</span>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}>
+            <div className="mb-6">
+              <span className="tag-purple">Our Impact</span>
+            </div>
+            <h1 className="font-display text-6xl sm:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight" style={{ fontFamily: 'Sora, sans-serif' }}>
+              Real Work. <br />
+              <span className="gradient-text-brand">Real Results.</span>
             </h1>
-            <p className="text-white/70 text-2xl max-w-2xl mx-auto font-light">
+            <p className="text-white/55 text-xl max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Every project we deliver solves a real African business problem with precision-built AI solutions.
             </p>
           </motion.div>
@@ -168,15 +171,15 @@ export default function PortfolioPage() {
       </section>
 
       {/* Filter tabs */}
-      <div className="sticky top-16 z-30 py-4 border-b border-white/6" style={{ background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(16px)' }}>
+      <div className="sticky top-16 z-30 py-6 border-b border-white/5 bg-black/80 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-3 flex-wrap justify-center">
             {filters.map(f => (
               <button key={f} onClick={() => setActive(f)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300 uppercase tracking-widest border ${
                   active === f
-                    ? 'text-white btn-primary'
-                    : 'text-white/50 hover:text-white bg-white/5 hover:bg-white/10 border border-white/8'
+                    ? 'bg-white text-black border-white'
+                    : 'text-white/40 hover:text-white bg-white/5 border-white/10 hover:bg-white/10'
                 }`}>
                 {f}
               </button>
@@ -186,24 +189,26 @@ export default function PortfolioPage() {
       </div>
 
       {/* Projects grid */}
-      <section ref={ref} className="py-16" style={{ background: '#050510' }}>
+      <section ref={ref} className="py-24 bg-ph-space">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {filtered.map((p, i) => <ProjectCard key={p.title} project={p} inView={inView} i={i} />)}
             </motion.div>
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <div className="text-center py-20 text-white/30">
-              <p className="text-4xl mb-4">🚧</p>
-              <p className="font-display text-xl">More projects coming soon</p>
+            <div className="text-center py-32 text-white/20">
+              <div className="text-4xl mb-6">🚧</div>
+              <p className="font-display text-xl font-bold" style={{ fontFamily: 'Sora, sans-serif' }}>More projects coming soon</p>
+              <p className="text-sm mt-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>We're constantly building new solutions.</p>
             </div>
           )}
         </div>

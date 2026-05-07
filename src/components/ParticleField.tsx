@@ -17,7 +17,7 @@ export default function ParticleField() {
 
     let animId: number
     const particles: Particle[] = []
-    const COLORS = ['#0066FF', '#6600FF', '#0099FF', '#3300FF']
+    const COLORS = ['#7c3aed', '#a78bfa', '#4c1d95', '#8b5cf6', '#c4b5fd']
 
     const resize = () => {
       canvas.width = canvas.offsetWidth
@@ -96,7 +96,7 @@ export default function ParticleField() {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = '#0066FF'
+            ctx.strokeStyle = '#7c3aed'
             ctx.globalAlpha = alpha
             ctx.lineWidth = 0.7
             ctx.stroke()

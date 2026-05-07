@@ -46,7 +46,7 @@ export default function StatsMarqueeSection() {
               <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-white/30 uppercase whitespace-nowrap">
                 {item}
               </span>
-              <div className="w-2 h-2 rounded-full bg-ph-blue/40" />
+              <div className="w-2 h-2 rounded-full bg-ph-purple/40" />
             </div>
           ))}
         </div>
@@ -69,10 +69,10 @@ export default function StatsMarqueeSection() {
                   <div className="text-[10px] font-mono tracking-[0.3em] text-white/30 uppercase mb-4">
                     {s.label}
                   </div>
-                  <div className="text-5xl sm:text-7xl font-bold text-white tracking-tighter mb-2 group-hover:gradient-text-blue transition-all duration-500">
+                  <div className="text-5xl sm:text-7xl font-bold text-white tracking-tighter mb-2 group-hover:gradient-text-purple transition-all duration-500">
                     <CountUp target={s.value} suffix={s.suffix} inView={inView} />
                   </div>
-                  <div className="h-px w-8 bg-ph-blue/40 mb-3 group-hover:w-16 transition-all duration-500" />
+                  <div className="h-px w-8 bg-ph-purple/40 mb-3 group-hover:w-16 transition-all duration-500" />
                   <p className="text-white/20 text-[10px] font-mono uppercase tracking-widest">{s.subtitle}</p>
                 </div>
               </motion.div>

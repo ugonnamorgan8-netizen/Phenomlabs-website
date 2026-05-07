@@ -1,4 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { GraduationCap, Zap, Cpu, ArrowRight } from 'lucide-react'
 import { useInView } from '../hooks/useInView'
 import CTABannerSection from '../components/CTABannerSection'
 import ParticleVortex3D from '../components/ParticleVortex3D'
@@ -7,12 +8,12 @@ import ParticleVortex3D from '../components/ParticleVortex3D'
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,60,180,0.15) 0%, #000 70%)' }} />
+      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.1) 0%, #000 70%)' }} />
       <div className="dot-grid absolute inset-0 opacity-30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4">{title}</h1>
-          <p className="text-white/55 text-xl max-w-2xl mx-auto">{subtitle}</p>
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Sora, sans-serif' }}>{title}</h1>
+          <p className="text-white/55 text-xl max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>{subtitle}</p>
         </motion.div>
       </div>
     </section>
@@ -75,8 +76,8 @@ function ServiceCard({ name, desc, price, color }: { name: string; desc: string;
       />
       
       <div className="relative z-10 transform-gpu" style={{ transform: "translateZ(30px)" }}>
-        <h3 className="font-display font-bold text-white text-xl mb-3">{name}</h3>
-        <p className="text-white/60 text-sm leading-relaxed mb-6">{desc}</p>
+        <h3 className="font-display font-bold text-white text-xl mb-3" style={{ fontFamily: 'Sora, sans-serif' }}>{name}</h3>
+        <p className="text-white/60 text-sm leading-relaxed mb-6" style={{ fontFamily: 'DM Sans, sans-serif' }}>{desc}</p>
         <span className="text-sm font-semibold px-4 py-1.5 rounded-full border shadow-[0_0_15px_rgba(0,0,0,0.5)]" style={{ color, borderColor: `${color}40`, background: `${color}15` }}>
           {price}
         </span>
@@ -99,7 +100,9 @@ export default function ServicesPage() {
         <section id="learn" className="py-20 relative bg-black/40 backdrop-blur-md border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-4 mb-12">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.2)' }}>🎓</div>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-ph-purple border border-ph-purple/20 bg-ph-purple/5">
+                <GraduationCap size={28} />
+              </div>
               <div>
                 <h2 className="font-display text-3xl font-bold text-white">PHENOM LEARN</h2>
                 <p className="text-ph-purple text-sm mt-0.5">AI Education and Training</p>
@@ -116,7 +119,9 @@ export default function ServicesPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-12">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style={{ background: 'rgba(168,85,247,0.15)', border: '1px solid rgba(168,85,247,0.2)' }}>⚙️</div>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-ph-violet border border-ph-violet/20 bg-ph-violet/5">
+              <Zap size={28} />
+            </div>
             <div>
               <h2 className="font-display text-3xl font-bold text-white">PHENOM BUILD</h2>
               <p className="text-ph-violet text-sm mt-0.5">AI Automation and Development</p>
@@ -135,14 +140,18 @@ export default function ServicesPage() {
             style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.02) 100%)' }}>
             <div className="absolute inset-0 grid-lines opacity-10" />
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-purple border border-ph-violet/40 bg-ph-violet/10 mb-6 animate-pulse">COMING 2026</span>
-            <div className="text-5xl mb-6 transform hover:scale-110 transition-transform cursor-pointer">🧠</div>
-            <h2 className="font-display text-4xl font-bold text-white mb-4">PHENOM OS</h2>
-            <p className="text-ph-violet font-semibold tracking-wide uppercase text-sm mb-6">Africa's First AI Business Operating System</p>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">AI Accounting, WhatsApp Intelligence, Customer Automation, and Business Planning — all in one powerful system built for African SMEs.</p>
-            <a href="/phenom-os" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-sm hover:scale-105 transition-transform"
-              style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
-              Experience the Future →
-            </a>
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 rounded-3xl bg-ph-purple/10 border border-ph-purple/20 flex items-center justify-center text-ph-purple shadow-xl shadow-ph-purple/5">
+                  <Cpu size={32} />
+                </div>
+              </div>
+              <h2 className="font-display text-4xl font-bold text-white mb-4">PHENOM OS</h2>
+              <p className="text-ph-violet font-semibold tracking-wide uppercase text-sm mb-6">Africa's First AI Business Operating System</p>
+              <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">AI Accounting, WhatsApp Intelligence, Customer Automation, and Business Planning — all in one powerful system built for African SMEs.</p>
+              <a href="/phenom-os" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-sm hover:scale-105 transition-transform"
+                style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+                Experience the Future <ArrowRight size={16} />
+              </a>
           </div>
         </div>
       </section>

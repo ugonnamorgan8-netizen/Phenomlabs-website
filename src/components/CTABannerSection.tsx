@@ -17,19 +17,17 @@ export default function CTABannerSection() {
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
         >
           <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-[10px] font-mono uppercase tracking-[0.5em] text-ph-violet mb-8 block font-bold"
+            className="inline-block mb-6 tag-purple"
           >
             The Future is Intelligent
           </motion.span>
           
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-12 tracking-tighter leading-[0.9] text-balance">
+          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-10 leading-[0.92] text-balance" style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.03em' }}>
             Let’s Build <br />
             <span className="gradient-text-brand drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">The Impossible.</span>
           </h2>
           
-          <p className="text-white/40 text-xl mb-16 max-w-2xl mx-auto leading-relaxed text-balance">
+          <p className="text-white/40 text-xl mb-14 max-w-xl mx-auto leading-relaxed text-balance" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Join the ranks of forward-thinking African organizations leveraging tactical AI to outpace the competition.
           </p>
 
@@ -49,7 +47,7 @@ export default function CTABannerSection() {
               className="btn-premium-outline px-12 py-5 group"
             >
               <span className="relative z-10 flex items-center gap-3 text-base">
-                <MessageSquare size={20} className="text-ph-violet" /> Talk to an Expert
+                <MessageSquare size={20} className="text-ph-purple-light" /> Talk to an Expert
               </span>
             </a>
           </div>

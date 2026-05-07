@@ -1,20 +1,19 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Zap, Globe, Trophy, Smartphone, ChevronDown } from 'lucide-react'
+import { ArrowRight, MapPin, Layers, Star, ChevronDown, Globe } from 'lucide-react'
 import ParticleField from '../components/ParticleField'
 import NeuralNetwork3D from '../components/NeuralNetwork3D'
 
 const wordVariants = {
-  hidden: { opacity: 0, filter: 'blur(12px)', y: 20 },
-  visible: (i: number) => ({ opacity: 1, filter: 'blur(0px)', y: 0, transition: { delay: i * 0.12, duration: 0.6 } }),
+  hidden: { opacity: 0, filter: 'blur(10px)', y: 18 },
+  visible: (i: number) => ({ opacity: 1, filter: 'blur(0px)', y: 0, transition: { delay: i * 0.14, duration: 0.65, ease: [0.22, 1, 0.36, 1] } }),
 }
 
 const trustBadges = [
-  { icon: Zap, label: 'Certified AI Specialists' },
-  { icon: Globe, label: 'Serving Nigeria + Africa' },
-  { icon: Trophy, label: 'Real Delivered Projects' },
-  { icon: Smartphone, label: 'WhatsApp Ready' },
+  { icon: MapPin, label: 'Based in Nigeria' },
+  { icon: Layers, label: 'End-to-End AI Solutions' },
+  { icon: Star, label: 'Trusted by Businesses' },
 ]
 
 export default function HeroSection() {
@@ -23,10 +22,9 @@ export default function HeroSection() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start']
   })
 
-  // Smooth out the scroll progress for the 3D effect
   const scrollProgress = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   const onMouseMove = (e: React.MouseEvent) => {
@@ -42,15 +40,17 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[120vh] flex flex-col overflow-hidden"
-      style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,40,120,0.18) 0%, #000 70%)' }}
+      className="relative min-h-[110vh] flex flex-col overflow-hidden"
+      style={{ background: '#000' }}
       onMouseMove={onMouseMove}
     >
-      {/* Aurora layers */}
+      {/* Subtle purple radial at top-center */}
       <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.08]"
+          style={{ background: 'radial-gradient(ellipse at 50% 0%, #7c3aed 0%, transparent 65%)', filter: 'blur(40px)' }} />
         <div className="aurora-1 absolute inset-0" />
         <div className="aurora-2 absolute inset-0" />
-        <div className="dot-grid absolute inset-0 opacity-40" />
+        <div className="dot-grid absolute inset-0 opacity-30" />
       </div>
 
       {/* Particle canvas */}
@@ -59,24 +59,24 @@ export default function HeroSection() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 flex-1 w-full gap-12 lg:gap-0">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 flex-1 w-full gap-10 lg:gap-0">
 
         {/* LEFT — Text */}
         <div className="flex-1 lg:w-3/5">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ph-blue/30 bg-ph-blue/10 text-sm text-white/80 mb-8"
+            className="tag-purple mb-8"
           >
-            <span className="text-base">🌍</span>
-            <span className="font-medium">Africa's #1 AI Company</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-ph-blue animate-pulse" />
+            <Globe size={14} className="text-ph-purple-light" />
+            <span>Africa's AI Company</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-ph-purple-light animate-pulse" />
           </motion.div>
 
           {/* Headline */}
-          <h1 className="hero-headline text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white mb-6">
+          <h1 className="hero-headline text-5xl sm:text-6xl lg:text-7xl xl:text-[5.2rem] text-white mb-7">
             {headline.map((line, li) => (
               <div key={li} className="overflow-hidden">
                 <motion.div
@@ -94,17 +94,17 @@ export default function HeroSection() {
 
           {/* Description & Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.75 }}
           >
-            <p className="text-lg sm:text-xl text-white/50 leading-relaxed mb-10 max-w-xl">
+            <p className="text-lg text-white/48 leading-relaxed mb-9 max-w-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               We empower organizations across Africa with tactical AI solutions, intelligent automation, and world-class literacy programs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row gap-3.5 mb-11">
               <Link to="/services" className="btn-premium group">
                 <span className="relative z-10 flex items-center gap-2">
-                  Get Started <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  Get Started <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </Link>
               <Link to="/phenom-os" className="btn-premium-outline">
@@ -118,11 +118,12 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.0 }}
-            className="flex flex-wrap gap-3"
+            className="flex flex-wrap gap-2.5"
           >
             {trustBadges.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/8 text-xs text-white/60">
-                <Icon size={12} className="text-ph-blue" />
+              <div key={label} className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs text-white/50"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', fontFamily: 'DM Sans, sans-serif' }}>
+                <Icon size={12} className="text-ph-purple-light" />
                 {label}
               </div>
             ))}
@@ -130,9 +131,9 @@ export default function HeroSection() {
         </div>
 
         {/* RIGHT — 3D Sphere */}
-        <div className="w-full lg:w-2/5 h-64 sm:h-80 lg:h-[600px] relative">
+        <div className="w-full lg:w-2/5 h-64 sm:h-80 lg:h-[580px] relative">
           <div className="absolute inset-0 rounded-full pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%)' }} />
+            style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)' }} />
           <NeuralNetwork3D mouse={mouseRef} scrollProgress={scrollProgress} />
         </div>
       </div>
@@ -142,11 +143,11 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4 }}
-        className="relative z-10 flex flex-col items-center pb-8 gap-2"
+        className="relative z-10 flex flex-col items-center pb-10 gap-2"
       >
-        <span className="text-white/30 text-xs tracking-widest uppercase">Scroll to explore</span>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>
-          <ChevronDown size={20} className="text-white/30" />
+        <span className="text-white/25 text-xs tracking-widest uppercase" style={{ fontFamily: 'JetBrains Mono, monospace' }}>Scroll to explore</span>
+        <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+          <ChevronDown size={18} className="text-white/25" />
         </motion.div>
       </motion.div>
     </section>

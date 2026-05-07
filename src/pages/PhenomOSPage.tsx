@@ -1,17 +1,17 @@
 import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { Check, ChevronDown, ChevronUp, BarChart3, MessageSquare, Bot, FileText, TrendingUp, Landmark, Rocket } from 'lucide-react'
 import { Canvas } from '@react-three/fiber'
 import Rocket3D from '../components/Rocket3D'
 
 const features = [
-  { phase: 'Phase 1 — Core', emoji: '📊', title: 'AI Accounting & Invoicing', desc: 'Generate, send, and track invoices. Get real-time profit/loss summaries via WhatsApp.' },
-  { phase: 'Phase 1 — Core', emoji: '💬', title: 'WhatsApp Business Intelligence', desc: 'Ask your business any question via WhatsApp and get instant AI-powered answers.' },
-  { phase: 'Phase 2 — Growth', emoji: '🤖', title: 'Automated Customer Follow-ups', desc: 'AI sends personalized follow-up messages to leads and customers automatically.' },
-  { phase: 'Phase 2 — Growth', emoji: '📝', title: 'AI Business Plan Generator', desc: 'Describe your business and get a full, investor-ready business plan in minutes.' },
-  { phase: 'Phase 3 — Enterprise', emoji: '📈', title: 'Sales Forecasting', desc: 'Predict monthly revenue, identify trends, and get stocking recommendations.' },
-  { phase: 'Phase 3 — Enterprise', emoji: '🏦', title: 'Loan & Funding Matching', desc: 'AI matches your business profile to available grants and loan opportunities in Nigeria.' },
+  { phase: 'Phase 1 — Core', icon: BarChart3, title: 'AI Accounting & Invoicing', desc: 'Generate, send, and track invoices. Get real-time profit/loss summaries via WhatsApp.' },
+  { phase: 'Phase 1 — Core', icon: MessageSquare, title: 'WhatsApp Business Intelligence', desc: 'Ask your business any question via WhatsApp and get instant AI-powered answers.' },
+  { phase: 'Phase 2 — Growth', icon: Bot, title: 'Automated Customer Follow-ups', desc: 'AI sends personalized follow-up messages to leads and customers automatically.' },
+  { phase: 'Phase 2 — Growth', icon: FileText, title: 'AI Business Plan Generator', desc: 'Describe your business and get a full, investor-ready business plan in minutes.' },
+  { phase: 'Phase 3 — Enterprise', icon: TrendingUp, title: 'Sales Forecasting', desc: 'Predict monthly revenue, identify trends, and get stocking recommendations.' },
+  { phase: 'Phase 3 — Enterprise', icon: Landmark, title: 'Loan & Funding Matching', desc: 'AI matches your business profile to available grants and loan opportunities in Nigeria.' },
 ]
 
 const steps = [
@@ -21,9 +21,9 @@ const steps = [
 ]
 
 const pricing = [
-  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#2563EB', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
-  { name: 'Business', price: '₦9,999', period: '/month', color: '#7C3AED', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
-  { name: 'Enterprise', price: 'Custom', period: 'Contact Us', color: '#FFB800', features: ['All Business Features', 'Sales Forecasting', 'Funding Matching', 'Custom Integrations', 'Dedicated Account Manager'] },
+  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#a78bfa', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
+  { name: 'Business', price: '₦9,999', period: '/month', color: '#7c3aed', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
+  { name: 'Enterprise', price: 'Custom', period: 'Contact Us', color: '#4c1d95', features: ['All Business Features', 'Sales Forecasting', 'Funding Matching', 'Custom Integrations', 'Dedicated Account Manager'] },
 ]
 
 const faqs = [
@@ -37,16 +37,20 @@ const faqs = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border border-white/8 rounded-xl overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-white/3 transition-colors">
-        <span className="font-medium text-white text-sm">{q}</span>
-        {open ? <ChevronUp size={16} className="text-white/40 flex-shrink-0" /> : <ChevronDown size={16} className="text-white/40 flex-shrink-0" />}
-      </button>
-      {open && (
-        <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} className="overflow-hidden">
-          <p className="px-6 pb-4 text-sm text-white/55 leading-relaxed">{a}</p>
+    <div className="border border-white/8 rounded-xl overflow-hidden transition-all duration-300" style={{ background: open ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/3 transition-colors">
+        <span className="font-semibold text-white text-base" style={{ fontFamily: 'Sora, sans-serif' }}>{q}</span>
+        <motion.div animate={{ rotate: open ? 180 : 0 }}>
+          <ChevronDown size={18} className="text-white/40 flex-shrink-0" />
         </motion.div>
-      )}
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+            <p className="px-6 pb-6 text-sm text-white/50 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -68,13 +72,13 @@ export default function PhenomOSPage() {
   const { ref: pricingRef, inView: pricingInView } = useInView()
 
   return (
-    <main ref={containerRef} className="bg-black">
+    <main ref={containerRef} className="bg-black min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-24">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20">
         {/* Background Layers */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(124,58,237,0.15) 0%, transparent 70%)' }} />
-        <div className="grid-lines absolute inset-0 opacity-20 pointer-events-none" />
-        <div className="aurora-1 absolute inset-0 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 70%)' }} />
+        <div className="grid-lines absolute inset-0 opacity-15 pointer-events-none" />
+        <div className="aurora-1 absolute inset-0 pointer-events-none opacity-30" />
 
         {/* Rocket 3D Canvas */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -84,30 +88,38 @@ export default function PhenomOSPage() {
             <Rocket3D progress={rocketProgress} />
           </Canvas>
         </div>
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ph-violet/30 bg-ph-violet/10 text-ph-purple text-sm font-semibold mb-6 animate-pulse">
-              🚀 Launching 2026 — Join the Waitlist
-            </span>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Meet Your <span className="gradient-text-brand">AI Business Manager</span>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}>
+            <div className="inline-block mb-6">
+              <span className="tag-purple">🚀 Launching 2026 — Join the Waitlist</span>
+            </div>
+            <h1 className="font-display text-5xl sm:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight" style={{ fontFamily: 'Sora, sans-serif' }}>
+              Meet Your <br />
+              <span className="gradient-text-brand">AI Business Manager</span>
             </h1>
-            <p className="text-white/60 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white/55 text-xl mb-12 max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               PHENOM OS is Africa's first AI-powered business operating system. Run your entire business from WhatsApp.
             </p>
+            
             {/* Waitlist form */}
             {!joined ? (
               <form onSubmit={e => { e.preventDefault(); if (email) setJoined(true) }} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required
-                  className="flex-1 px-5 py-3.5 rounded-xl bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-ph-violet/60 transition-colors" />
-                <button type="submit" className="px-7 py-3.5 rounded-xl font-bold text-white text-sm whitespace-nowrap"
-                  style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+                <input 
+                  type="email" 
+                  value={email} 
+                  onChange={e => setEmail(e.target.value)} 
+                  placeholder="Enter your email" 
+                  required
+                  className="flex-1 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-ph-purple/50 transition-all duration-300" 
+                />
+                <button type="submit" className="btn-primary px-8 py-4 whitespace-nowrap shadow-lg shadow-ph-purple/20">
                   Join Waitlist →
                 </button>
               </form>
             ) : (
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl border border-green-500/30 bg-green-500/10 text-green-400">
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-ph-purple/30 bg-ph-purple/10 text-ph-purple-light">
                 <Check size={18} /> You're on the waitlist! We'll notify you first.
               </motion.div>
             )}
@@ -115,80 +127,93 @@ export default function PhenomOSPage() {
         </div>
       </section>
 
-      {/* The Problem */}
-      <section className="py-20" style={{ background: '#050510' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-red-400 text-sm font-semibold uppercase tracking-widest mb-3">The Problem</p>
-              <h2 className="font-display text-4xl font-bold text-white mb-6">African SMEs Are Running Blind</h2>
+      {/* The Problem & Solution */}
+      <section className="py-32 relative overflow-hidden bg-ph-space">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-ph-purple/60 mb-4 block font-bold">The Challenge</span>
+              <h2 className="font-display text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Sora, sans-serif' }}>African SMEs Are Running Blind</h2>
               <div className="space-y-4">
-                {['No real-time visibility into sales, expenses or profits', 'Hours lost to manual invoicing, follow-ups, and reports', 'No system to track customers, stock, or outstanding payments', 'Business decisions made on gut feeling, not data'].map(p => (
-                  <div key={p} className="flex items-start gap-3 p-4 rounded-xl bg-red-500/5 border border-red-500/15">
-                    <span className="text-red-400 mt-0.5">✕</span>
-                    <p className="text-white/65 text-sm">{p}</p>
+                {[
+                  'No real-time visibility into sales, expenses or profits', 
+                  'Hours lost to manual invoicing, follow-ups, and reports', 
+                  'No system to track customers, stock, or outstanding payments', 
+                  'Business decisions made on gut feeling, not data'
+                ].map(p => (
+                  <div key={p} className="flex items-start gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+                    <span className="text-ph-purple/40 font-bold mt-0.5">✕</span>
+                    <p className="text-white/50 text-sm leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{p}</p>
                   </div>
                 ))}
               </div>
-            </div>
-            <div>
-              <p className="text-green-400 text-sm font-semibold uppercase tracking-widest mb-3">The Solution</p>
-              <h2 className="font-display text-4xl font-bold text-white mb-6">PHENOM OS Changes Everything</h2>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-ph-purple/60 mb-4 block font-bold">The Solution</span>
+              <h2 className="font-display text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Sora, sans-serif' }}>PHENOM OS Changes Everything</h2>
               <div className="space-y-4">
-                {['Instant financial reports via WhatsApp — anytime, anywhere', 'Automated invoicing, reminders, and payment tracking', 'AI-powered customer intelligence and follow-up system', 'Data-driven insights to make smarter business decisions'].map(s => (
-                  <div key={s} className="flex items-start gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/15">
-                    <Check size={16} className="text-green-400 mt-0.5 flex-shrink-0" />
-                    <p className="text-white/65 text-sm">{s}</p>
+                {[
+                  'Instant financial reports via WhatsApp — anytime, anywhere', 
+                  'Automated invoicing, reminders, and payment tracking', 
+                  'AI-powered customer intelligence and follow-up system', 
+                  'Data-driven insights to make smarter business decisions'
+                ].map(s => (
+                  <div key={s} className="flex items-start gap-4 p-5 rounded-2xl bg-ph-purple/5 border border-ph-purple/10 hover:border-ph-purple/20 transition-colors">
+                    <Check size={18} className="text-ph-purple-light mt-0.5 flex-shrink-0" />
+                    <p className="text-white/70 text-sm leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{s}</p>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section ref={stepsRef} className="py-20 bg-black">
+      <section ref={stepsRef} className="py-32 bg-black relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl font-bold text-white mb-3">How It <span className="gradient-text">Works</span></h2>
-            <p className="text-white/50">Up and running in 3 simple steps</p>
+          <div className="text-center mb-20">
+            <span className="tag-purple mb-4">Simple Setup</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>How It <span className="gradient-text-brand">Works</span></h2>
+            <p className="text-white/40 mt-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>Up and running in 3 simple steps</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
             {steps.map((s, i) => (
               <motion.div key={s.n} initial={{ opacity: 0, y: 30 }} animate={stepsInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.15 }}
-                className="text-center relative">
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center font-display font-black text-xl text-white"
-                  style={{ background: 'linear-gradient(135deg, #FFB800, #FF6600)' }}>
+                className="text-center group">
+                <div className="w-20 h-20 rounded-3xl mx-auto mb-8 flex items-center justify-center font-display font-black text-2xl text-white shadow-xl shadow-ph-purple/10 transition-transform duration-500 group-hover:scale-110"
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #4c1d95)' }}>
                   {s.n}
                 </div>
-                {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-[58%] w-[42%] h-px"
-                    style={{ background: 'linear-gradient(90deg, rgba(255,184,0,0.4), transparent)' }} />
-                )}
-                <h3 className="font-display font-bold text-white text-xl mb-2">{s.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
+                <h3 className="font-display font-bold text-white text-xl mb-4" style={{ fontFamily: 'Sora, sans-serif' }}>{s.title}</h3>
+                <p className="text-white/45 text-sm leading-relaxed max-w-xs mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>{s.desc}</p>
               </motion.div>
             ))}
+            {/* Connecting lines */}
+            <div className="hidden lg:block absolute top-10 left-[25%] right-[25%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section ref={featRef} className="py-20" style={{ background: '#050510' }}>
+      {/* Features Roadmap */}
+      <section ref={featRef} className="py-32 bg-ph-space relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl font-bold text-white mb-3">Feature <span className="gradient-text-gold">Roadmap</span></h2>
-            <p className="text-white/50">Rolling out in phases — starting with the most impactful features</p>
+          <div className="text-center mb-20">
+            <span className="tag-purple mb-4">Roadmap</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>Feature <span className="gradient-text-brand">Rollout</span></h2>
+            <p className="text-white/40 mt-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>Building the future of African business intelligence phase by phase.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
               <motion.div key={f.title} initial={{ opacity: 0, y: 25 }} animate={featInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.08 }}
-                className="glass rounded-xl p-6 border border-white/8 card-hover-glow">
-                <span className="text-xs font-mono text-amber-400/60 mb-2 block">{f.phase}</span>
-                <div className="text-2xl mb-3">{f.emoji}</div>
-                <h3 className="font-display font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+                className="glass rounded-2xl p-8 border border-white/5 hover:border-ph-purple/30 transition-all duration-500 group">
+                <span className="text-[10px] font-mono text-ph-purple-light/50 mb-4 block font-bold uppercase tracking-widest">{f.phase}</span>
+                <div className="mb-4 group-hover:scale-110 transition-transform duration-300 text-ph-purple-light">
+                  <f.icon size={28} strokeWidth={1.5} />
+                </div>
+                <h3 className="font-display font-bold text-white text-lg mb-3" style={{ fontFamily: 'Sora, sans-serif' }}>{f.title}</h3>
+                <p className="text-white/40 text-sm leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -196,37 +221,39 @@ export default function PhenomOSPage() {
       </section>
 
       {/* Pricing */}
-      <section ref={pricingRef} className="py-20 bg-black">
+      <section ref={pricingRef} className="py-32 bg-black relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl font-bold text-white mb-3">Simple <span className="gradient-text">Pricing</span></h2>
-            <p className="text-white/50">Start free. Scale as you grow. No hidden fees.</p>
+          <div className="text-center mb-20">
+            <span className="tag-purple mb-4">Pricing Plans</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>Simple <span className="gradient-text-brand">Pricing</span></h2>
+            <p className="text-white/40 mt-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>Start free. Scale as you grow. Built for impact.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
             {pricing.map((p, i) => (
               <motion.div key={p.name} initial={{ opacity: 0, y: 30 }} animate={pricingInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1 }}
-                className={`glass rounded-2xl p-8 border relative ${p.popular ? 'border-ph-purple/50' : 'border-white/8'}`}
-                style={{ boxShadow: p.popular ? '0 0 40px rgba(102,0,255,0.15)' : undefined }}>
+                className={`glass rounded-[2.5rem] p-10 border relative flex flex-col ${p.popular ? 'border-ph-purple/40 ring-1 ring-ph-purple/20' : 'border-white/5'}`}
+                style={{ background: p.popular ? 'rgba(15, 10, 30, 0.6)' : 'rgba(10, 10, 10, 0.6)' }}>
                 {p.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, #2563EB, #7C3AED)' }}>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-widest"
+                    style={{ background: 'linear-gradient(135deg, #7c3aed, #4c1d95)' }}>
                     Most Popular
                   </div>
                 )}
-                <h3 className="font-display font-bold text-white text-xl mb-1">{p.name}</h3>
-                <div className="flex items-end gap-1 mb-1">
-                  <span className="font-display font-black text-4xl" style={{ color: p.color }}>{p.price}</span>
+                <h3 className="font-display font-bold text-white text-xl mb-6" style={{ fontFamily: 'Sora, sans-serif' }}>{p.name}</h3>
+                <div className="flex items-end gap-1 mb-2">
+                  <span className="font-display font-bold text-5xl text-white" style={{ fontFamily: 'Sora, sans-serif' }}>{p.price}</span>
+                  <span className="text-white/30 text-sm mb-2">{p.period}</span>
                 </div>
-                <p className="text-white/40 text-sm mb-6">{p.period}</p>
-                <ul className="space-y-3 mb-8">
+                <div className="h-px w-full bg-white/5 my-8" />
+                <ul className="space-y-4 mb-10 flex-1">
                   {p.features.map(f => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-white/65">
-                      <Check size={14} style={{ color: p.color }} className="flex-shrink-0" />
+                    <li key={f} className="flex items-start gap-3 text-sm text-white/50" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                      <Check size={16} className="text-ph-purple-light flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${p.popular ? 'btn-primary text-white' : 'btn-secondary text-white'}`}>
+                <button className={`w-full py-4 rounded-full font-bold text-sm transition-all duration-300 ${p.popular ? 'bg-white text-black hover:bg-ph-purple-light hover:text-white' : 'bg-white/5 text-white border border-white/10 hover:bg-white/10'}`} style={{ fontFamily: 'DM Sans, sans-serif' }}>
                   {p.price === 'Custom' ? 'Contact Us' : 'Join Waitlist'}
                 </button>
               </motion.div>
@@ -236,12 +263,15 @@ export default function PhenomOSPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20" style={{ background: '#050510' }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-4xl font-bold text-white text-center mb-12">
-            Frequently Asked <span className="gradient-text">Questions</span>
-          </h2>
-          <div className="space-y-3">
+      <section className="py-32 bg-ph-space relative border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <span className="tag-purple mb-4">FAQ</span>
+            <h2 className="font-display text-4xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>
+              Common <span className="gradient-text-brand">Questions</span>
+            </h2>
+          </div>
+          <div className="space-y-4">
             {faqs.map(f => <FAQItem key={f.q} {...f} />)}
           </div>
         </div>
