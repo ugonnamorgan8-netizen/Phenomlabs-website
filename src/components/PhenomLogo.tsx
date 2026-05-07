@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const PhenomLogo = ({ className = "w-8 h-8", color = "#7c3aed" }: { className?: string; color?: string }) => {
   return (
     <svg 

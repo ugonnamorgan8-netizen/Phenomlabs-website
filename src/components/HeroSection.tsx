@@ -7,7 +7,16 @@ import NeuralNetwork3D from '../components/NeuralNetwork3D'
 
 const wordVariants = {
   hidden: { opacity: 0, filter: 'blur(10px)', y: 18 },
-  visible: (i: number) => ({ opacity: 1, filter: 'blur(0px)', y: 0, transition: { delay: i * 0.14, duration: 0.65, ease: [0.22, 1, 0.36, 1] } }),
+  visible: (i: number) => ({ 
+    opacity: 1, 
+    filter: 'blur(0px)', 
+    y: 0, 
+    transition: { 
+      delay: i * 0.14, 
+      duration: 0.65, 
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number] 
+    } 
+  }),
 }
 
 const trustBadges = [

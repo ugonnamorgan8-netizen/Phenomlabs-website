@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Mail, MapPin, Phone, MessageCircle, Clock, Check, ChevronDown } from 'lucide-react'
 
 const services = ['AI Literacy Training', 'Prompt Engineering Workshop', 'Python Automation', 'Web Development', 'Workflow Automation', 'PHENOM OS Waitlist', 'General Enquiry']

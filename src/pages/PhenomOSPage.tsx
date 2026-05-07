@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { Check, ChevronDown, ChevronUp, BarChart3, MessageSquare, Bot, FileText, TrendingUp, Landmark, Rocket } from 'lucide-react'
+import { Check, ChevronDown, BarChart3, MessageSquare, Bot, FileText, TrendingUp, Landmark } from 'lucide-react'
 import { Canvas } from '@react-three/fiber'
 import Rocket3D from '../components/Rocket3D'
 
