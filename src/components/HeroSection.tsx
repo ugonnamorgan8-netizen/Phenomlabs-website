@@ -21,8 +21,9 @@ const wordVariants = {
 
 const trustBadges = [
   { icon: MapPin, label: 'Based in Nigeria' },
-  { icon: Layers, label: 'End-to-End AI Solutions' },
-  { icon: Star, label: 'Trusted by Businesses' },
+  { icon: Layers, label: 'AI Systems & Automation' },
+  { icon: Star, label: 'Healthcare · Education · Fintech' },
+  { icon: Globe, label: 'Global Reach' },
 ]
 
 export default function HeroSection() {
@@ -44,7 +45,7 @@ export default function HeroSection() {
     ]
   }
 
-  const headline = ['We Build, Teach', 'and Automate', 'with AI']
+  const headline = ['AI Systems. Automation.', 'Education Technology.', 'Built to Scale.']
 
   return (
     <section
@@ -80,7 +81,7 @@ export default function HeroSection() {
             className="tag-purple mb-8"
           >
             <Globe size={14} className="text-ph-purple-light" />
-            <span>Africa's AI Company</span>
+            <span>Africa's AI Ecosystem</span>
             <span className="w-1.5 h-1.5 rounded-full bg-ph-purple-light animate-pulse" />
           </motion.div>
 
@@ -107,8 +108,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75 }}
           >
-            <p className="text-lg text-white/48 leading-relaxed mb-9 max-w-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-              We empower organizations across Africa with tactical AI solutions, intelligent automation, and world-class literacy programs.
+            <p className="text-lg text-white/48 leading-relaxed mb-8 max-w-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              We design AI-powered systems, automation tools, and educational technologies that help businesses, healthcare providers, and creators scale smarter.
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 mb-11">
               <Link to="/services" className="btn-premium group">

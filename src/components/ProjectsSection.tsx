@@ -6,18 +6,20 @@ const projects = [
   {
     title: 'FRSC Training Automation',
     category: 'PROCESS AUTOMATION',
-    description: 'Reduced compliance tracking from hours to under 5 minutes with zero human error.',
+    description: 'Reduced driving school compliance tracking from hours to under 5 minutes with zero human error.',
     impact: '98% Time Saved',
     year: '2026',
-    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=1000'
+    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=1000',
+    link: 'https://dssp-automation-production.up.railway.app/'
   },
   {
-    title: 'Abia Telehealth Hub',
-    category: 'DIGITAL HEALTH',
-    description: 'A comprehensive medical gateway delivering AI-assisted consultations to millions.',
-    impact: 'Healthcare Digitized',
-    year: '2025',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000'
+    title: 'Lab EMR Clinical Deployment',
+    category: 'DIGITAL HEALTH / EMR',
+    description: 'Full-scale clinical implementation automating patient intake, lab workflows, and medical records.',
+    impact: '100% Digital Intake',
+    year: '2026',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000',
+    link: 'https://lab-emr-demo-production.up.railway.app/'
   },
   {
     title: 'Marvel Student System',
@@ -25,13 +27,14 @@ const projects = [
     description: 'Strategic management system orchestrating school operations for high-growth academies.',
     impact: 'Ops Streamlined',
     year: '2025',
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000'
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000',
+    link: 'https://marveldrivingschoolng.lovable.app/'
   },
 ]
 
 export default function ProjectsSection() {
   return (
-    <section className="py-32 bg-black relative">
+    <section className="py-32 bg-black relative" id="case-studies">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-10">
@@ -66,13 +69,16 @@ export default function ProjectsSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {projects.map((p, i) => (
-            <motion.div
+            <motion.a
               key={p.title}
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-none"
+              className="group cursor-none block"
             >
               <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-7 border border-white/6"
                 style={{ background: '#0f0f0f' }}>
@@ -111,7 +117,7 @@ export default function ProjectsSection() {
                   <span className="text-xs font-semibold text-white uppercase tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif' }}>{p.impact}</span>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 

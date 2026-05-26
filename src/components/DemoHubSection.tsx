@@ -1,0 +1,426 @@
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { ArrowRight, Play, Monitor, HeartPulse, Cpu, BookOpen, TrendingUp, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
+
+const demos = [
+  {
+    id: 'lab-emr',
+    icon: HeartPulse,
+    iconColor: '#f472b6',
+    category: 'HEALTHCARE',
+    title: 'Lab EMR',
+    subtitle: 'Electronic Medical Records System',
+    description:
+      'Experience the fully interactive medical portal handling automated patient registration, diagnostic reporting, digital prescriptions, and clinical notes at scale.',
+    type: 'Live Demo',
+    typeColor: '#22c55e',
+    platforms: ['web'],
+    ctaLabel: 'Launch EMR App',
+    ctaLink: 'https://lab-emr-demo-production.up.railway.app/',
+    isLive: true,
+  },
+  {
+    id: 'dssp',
+    icon: Cpu,
+    iconColor: '#a78bfa',
+    category: 'AUTOMATION',
+    title: 'DSSP Automation',
+    subtitle: 'FRSC Compliance Workflow',
+    description:
+      'Explore the FRSC driver school registration and certificate generation pipeline. Fully automated compliance tracking that completely eliminates human bottleneck.',
+    type: 'Live Demo',
+    typeColor: '#22c55e',
+    platforms: ['web'],
+    ctaLabel: 'Launch DSSP App',
+    ctaLink: 'https://dssp-automation-production.up.railway.app/',
+    secondaryCtaLabel: 'Marvel Driving School Website',
+    secondaryCtaLink: 'https://marveldrivingschoolng.lovable.app/',
+    isLive: true,
+  },
+  {
+    id: 'edugen',
+    icon: BookOpen,
+    iconColor: '#818cf8',
+    category: 'EDTECH',
+    title: 'EduGen AI',
+    subtitle: 'AI Curriculum Generator',
+    description:
+      'AI-powered syllabus and learning paths engine. Auto-generates weekly course guides, quizzes, and pedagogy plans from single course subject prompts.',
+    type: 'Preview / Sandbox',
+    typeColor: '#f59e0b',
+    platforms: ['web'],
+    ctaLabel: 'Request Preview',
+    ctaLink: '/contact',
+    isLive: false,
+  },
+  {
+    id: 'trading',
+    icon: TrendingUp,
+    iconColor: '#fbbf24',
+    category: 'FINTECH',
+    title: 'AI Trading Engine',
+    subtitle: 'Algorithmic Strategy Dashboard',
+    description:
+      'Algorithmic trading engine powered by deep learning. Monitored real-time signal flows, trade execution states, and automated risk bounds for digital assets.',
+    type: 'Preview / Sandbox',
+    typeColor: '#f59e0b',
+    platforms: ['web'],
+    ctaLabel: 'Join Beta',
+    ctaLink: '/contact',
+    isLive: false,
+  },
+]
+
+const demoStats = [
+  { value: '6', label: 'Live Products' },
+  { value: '3', label: 'Beta Previews' },
+  { value: '5+', label: 'Industries Covered' },
+]
+
+export default function DemoHubSection() {
+  const [showAll, setShowAll] = useState(false)
+
+  const visibleDemos = showAll ? demos : demos.slice(0, 2)
+
+  return (
+    <section className="py-32 relative overflow-hidden bg-black" id="demo-hub">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="grid-pattern absolute inset-0 opacity-15" />
+        <div className="aurora-1 absolute inset-0 opacity-30" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-[150px]"
+          style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 60%)' }} />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Header */}
+        <div className="text-center mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block mb-5 tag-purple"
+          >
+            <Play size={12} className="text-ph-purple-light" />
+            Demo Hub
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-white mb-5"
+            style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.03em' }}
+          >
+            See It In<br />
+            <span className="gradient-text-brand">Action.</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-white/38 max-w-lg mx-auto text-base leading-relaxed mb-10"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
+          >
+            Live demos, product previews, and walkthroughs — experience the intelligence before you commit.
+          </motion.p>
+
+          {/* Stats row */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.28 }}
+            className="flex items-center justify-center gap-10"
+          >
+            {demoStats.map(stat => (
+              <div key={stat.label} className="text-center">
+                <div className="text-2xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>{stat.value}</div>
+                <div className="text-[10px] font-mono uppercase tracking-widest text-white/30 mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Demo Video Mockups list */}
+        <div className="space-y-12 mb-16">
+          <AnimatePresence initial={false}>
+            {visibleDemos.map((demo, idx) => {
+              const Icon = demo.icon
+              return (
+                <motion.div
+                  key={demo.id}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.75, ease: [0.23, 1, 0.32, 1] }}
+                  className="glass-morphism rounded-3xl border border-white/8 hover:border-ph-purple/25 transition-all duration-500 group overflow-hidden relative"
+                  style={{ cursor: 'none' }}
+                  whileHover={{ y: -4 }}
+                >
+                  {/* Top shimmer line */}
+                  <div className="h-[2px] w-full"
+                    style={{ background: `linear-gradient(to right, transparent, ${demo.iconColor}80, transparent)` }} />
+
+                  <div className="p-8 lg:p-12">
+                    <div className="flex flex-col lg:flex-row gap-12 items-center">
+
+                      {/* Mockup Frame */}
+                      <div className="w-full lg:w-1/2 flex-shrink-0">
+                        <div className="rounded-2xl border border-white/8 overflow-hidden relative"
+                          style={{ background: '#0a0a0a', aspectRatio: '16/9' }}>
+                          {/* Browser chrome */}
+                          <div className="flex items-center gap-2 px-4 py-3 border-b border-white/6">
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#ff5f57' }} />
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#febc2e' }} />
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#28c840' }} />
+                            <div className="ml-3 flex-1 h-5 rounded-full border border-white/8 bg-white/3 flex items-center px-3">
+                              <span className="text-[9px] font-mono text-white/20">
+                                {demo.id === 'lab-emr' && 'labs.phenomhq.com/emr'}
+                                {demo.id === 'dssp' && 'labs.phenomhq.com/dssp'}
+                                {demo.id === 'edugen' && 'labs.phenomhq.com/edugen'}
+                                {demo.id === 'trading' && 'labs.phenomhq.com/trading'}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Fake UI Screen based on Demo ID */}
+                          {demo.id === 'lab-emr' && (
+                            <div className="p-5 space-y-3">
+                              <div className="flex gap-3">
+                                <div className="w-24 h-full rounded-lg border border-white/6 bg-white/3 p-2.5 space-y-1.5">
+                                  {['Dashboard', 'Patients', 'Diagnostics', 'Prescriptions'].map(item => (
+                                    <div key={item} className="h-4 rounded flex items-center px-1.5" style={{ background: item === 'Dashboard' ? 'rgba(244,114,182,0.15)' : 'transparent' }}>
+                                      <span className="text-[7px] font-mono text-white/30">{item}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                  <div className="grid grid-cols-3 gap-2">
+                                    {['Active Patients', 'Diagnoses', 'Queue'].map((s, idx) => (
+                                      <div key={s} className="rounded-lg border border-white/6 p-2" style={{ background: 'rgba(244,114,182,0.03)' }}>
+                                        <div className="text-[9px] font-bold text-white/60 mb-0.5">{['142', '23', '8'][idx]}</div>
+                                        <div className="text-[7px] font-mono text-white/20">{s}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <div className="rounded-lg border border-white/6 bg-white/2 p-2.5 space-y-1">
+                                    {['Nkechi Adeyemi — Consultation', 'Dr. Eze — Prescription Queued'].map(row => (
+                                      <div key={row} className="flex items-center gap-2 h-5 rounded border border-white/5 px-2 bg-white/2">
+                                        <div className="w-1 h-1 rounded-full" style={{ background: '#f472b6' }} />
+                                        <span className="text-[7px] font-mono text-white/25 truncate">{row}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {demo.id === 'dssp' && (
+                            <div className="p-5 space-y-3">
+                              <div className="flex gap-3">
+                                <div className="w-24 h-full rounded-lg border border-white/6 bg-white/3 p-2.5 space-y-1.5">
+                                  {['Overview', 'Schools', 'Certificates', 'Audit Logs'].map(item => (
+                                    <div key={item} className="h-4 rounded flex items-center px-1.5" style={{ background: item === 'Overview' ? 'rgba(167,139,250,0.15)' : 'transparent' }}>
+                                      <span className="text-[7px] font-mono text-white/30">{item}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                  <div className="grid grid-cols-3 gap-2">
+                                    {['Registered', 'Certified', 'Time Saved'].map((s, idx) => (
+                                      <div key={s} className="rounded-lg border border-white/6 p-2" style={{ background: 'rgba(167,139,250,0.03)' }}>
+                                        <div className="text-[9px] font-bold text-white/60 mb-0.5">{['18 Schools', '1.2k Students', '98%'][idx]}</div>
+                                        <div className="text-[7px] font-mono text-white/20">{s}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <div className="rounded-lg border border-white/6 bg-white/2 p-2.5 space-y-1">
+                                    {['Marvel Driving School — Compliant', 'Certificate #FRSC-8921 Generated'].map(row => (
+                                      <div key={row} className="flex items-center gap-2 h-5 rounded border border-white/5 px-2 bg-white/2">
+                                        <div className="w-1 h-1 rounded-full" style={{ background: '#a78bfa' }} />
+                                        <span className="text-[7px] font-mono text-white/25 truncate">{row}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {demo.id === 'edugen' && (
+                            <div className="p-5 space-y-3">
+                              <div className="rounded-lg border border-white/6 bg-white/3 p-3 space-y-2.5">
+                                <div className="flex items-center gap-2 justify-between">
+                                  <span className="text-[8px] font-mono text-white/40">Prompt: "Grade 10 Algebra Syllabus"</span>
+                                  <span className="text-[7px] font-mono px-1.5 py-0.5 rounded border border-indigo-500/30 text-indigo-400 bg-indigo-500/5">AI Core</span>
+                                </div>
+                                <div className="space-y-1.5">
+                                  <div className="h-5 rounded border border-white/5 bg-white/2 flex items-center px-2 text-[7px] font-mono text-white/30">
+                                    ✓ Week 1: Quadratic Equations Introduction
+                                  </div>
+                                  <div className="h-5 rounded border border-white/5 bg-white/2 flex items-center px-2 text-[7px] font-mono text-white/30">
+                                    ✓ Week 2: Factoring and Solving Methods
+                                  </div>
+                                  <div className="h-5 rounded border border-white/5 bg-white/2 flex items-center px-2 text-[7px] font-mono text-white/30">
+                                    ⚙ Week 3: Auto-generating assessment quizzes...
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {demo.id === 'trading' && (
+                            <div className="p-5 space-y-3">
+                              <div className="grid grid-cols-4 gap-2">
+                                {['BTC/USDT', 'SOL/USDT', 'Risk Bound', 'Active Strategy'].map((s, idx) => (
+                                  <div key={s} className="rounded-lg border border-white/6 p-2 text-center" style={{ background: 'rgba(251,191,36,0.03)' }}>
+                                    <div className="text-[7px] font-mono text-white/20 mb-0.5">{s}</div>
+                                    <div className="text-[9px] font-bold text-white/60">{['+3.8%', '-1.2%', 'Safe', 'Breakout'][idx]}</div>
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="h-16 rounded-lg border border-white/6 bg-white/2 p-2 flex items-end justify-between gap-1">
+                                {[30, 45, 25, 60, 80, 55, 90, 75, 85].map((h, i) => (
+                                  <div key={i} className="w-full rounded-t bg-amber-400/30" style={{ height: `${h}%` }} />
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Play button overlay */}
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                            style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(2px)' }}>
+                            <div className="w-16 h-16 rounded-full flex items-center justify-center border border-white/20"
+                              style={{ background: `rgba(124,58,237,0.4)` }}>
+                              <Play size={24} className="text-white ml-1" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 mt-3 pl-1">
+                          <Monitor size={12} className="text-white/20" />
+                          <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest">Web Application Preview</span>
+                        </div>
+                      </div>
+
+                      {/* Content column */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-5">
+                          <div className="w-12 h-12 rounded-2xl flex items-center justify-center border border-white/8"
+                            style={{ background: `${demo.iconColor}15` }}>
+                            <Icon size={22} style={{ color: demo.iconColor }} />
+                          </div>
+                          <span className="text-[9px] font-mono uppercase tracking-widest text-white/30">{demo.category}</span>
+                          <span className="text-[9px] font-mono px-2 py-0.5 rounded-full border"
+                            style={{ color: demo.typeColor, borderColor: `${demo.typeColor}30`, background: `${demo.typeColor}0f` }}>
+                            {demo.type}
+                          </span>
+                        </div>
+                        <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-ph-purple-light transition-colors"
+                          style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}>
+                          {demo.title}
+                        </h3>
+                        <p className="text-sm font-mono text-white/30 mb-5 uppercase tracking-widest">{demo.subtitle}</p>
+                        <p className="text-white/42 text-base leading-relaxed mb-8" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                          {demo.description}
+                        </p>
+                        <div className="flex flex-wrap gap-3.5">
+                          {demo.isLive ? (
+                            <a href={demo.ctaLink} target="_blank" rel="noopener noreferrer" className="btn-premium group inline-flex items-center gap-2">
+                              <span className="relative z-10 flex items-center gap-2">
+                                {demo.ctaLabel} <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                              </span>
+                            </a>
+                          ) : (
+                            <Link to={demo.ctaLink} className="btn-premium group inline-flex items-center gap-2">
+                              <span className="relative z-10 flex items-center gap-2">
+                                {demo.ctaLabel} <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                              </span>
+                            </Link>
+                          )}
+
+                          {demo.secondaryCtaLink && (
+                            <a href={demo.secondaryCtaLink} target="_blank" rel="noopener noreferrer" className="btn-premium-outline inline-flex items-center gap-2">
+                              <span className="relative z-10 flex items-center gap-2 text-sm">
+                                <ExternalLink size={14} /> {demo.secondaryCtaLabel}
+                              </span>
+                            </a>
+                          )}
+                          {!demo.secondaryCtaLink && (
+                            <Link to="/contact" className="btn-premium-outline inline-flex items-center gap-2 group">
+                              <span className="relative z-10 flex items-center gap-2 text-sm">
+                                <ExternalLink size={14} /> Schedule Walkthrough
+                              </span>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* View All / Toggle Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-center mt-12"
+        >
+          <button
+            onClick={() => {
+              setShowAll(!showAll)
+              if (showAll) {
+                document.getElementById('demo-hub')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="btn-premium-outline inline-flex items-center gap-2.5 group"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              {showAll ? (
+                <>
+                  Show Less Demos <ChevronUp size={16} className="group-hover:-translate-y-0.5 transition-transform" />
+                </>
+              ) : (
+                <>
+                  View All Product Demos <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                </>
+              )}
+            </span>
+          </button>
+        </motion.div>
+
+        {/* Custom request CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-20 text-center"
+        >
+          <p className="text-white/30 text-sm mb-5" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            Can't find what you're looking for? Request a custom demo built for your specific requirements.
+          </p>
+          <Link
+            to="/contact"
+            className="btn-premium inline-flex items-center gap-2 group"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Request Custom System Demo <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+            </span>
+          </Link>
+        </motion.div>
+
+      </div>
+    </section>
+  )
+}

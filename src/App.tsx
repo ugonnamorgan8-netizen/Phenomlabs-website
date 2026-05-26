@@ -50,6 +50,14 @@ function AnimatedRoutes() {
   )
 }
 
+function ScrollToTopOnRoute() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
   const [loading, setLoading] = useState(true)
 
@@ -61,6 +69,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTopOnRoute />
       <div className="noise-overlay" />
       <TechBackground />
       <CustomCursor />
