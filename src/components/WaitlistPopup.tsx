@@ -40,7 +40,7 @@ export default function WaitlistPopup() {
               background: 'rgba(10, 10, 10, 0.96)',
               backdropFilter: 'blur(32px) saturate(180%)',
               WebkitBackdropFilter: 'blur(32px) saturate(180%)',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(124,58,237,0.18), inset 0 1px 0 rgba(255,255,255,0.06)',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(131,231,238,0.18), inset 0 1px 0 rgba(255,255,255,0.06)',
             }}
           >
             {/* Purple accent top bar */}
@@ -58,15 +58,15 @@ export default function WaitlistPopup() {
               <>
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #7c3aed, #6d28d9)' }}>
+                    style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)' }}>
                     <Zap size={14} className="text-white" />
                   </div>
-                  <span className="text-xs font-medium text-white/55 uppercase tracking-wider" style={{ fontFamily: 'DM Sans, sans-serif' }}>Early Access</span>
+                  <span className="text-xs font-medium text-white/55 uppercase tracking-wider" >Early Access</span>
                 </div>
-                <h3 className="font-bold text-white text-lg mb-1.5 leading-snug" style={{ fontFamily: 'Sora, sans-serif' }}>
+                <h3 className="font-bold text-white text-lg mb-1.5 leading-snug" >
                   Join 1,000+ Businesses
                 </h3>
-                <p className="text-white/55 text-sm mb-4 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                <p className="text-white/55 text-sm mb-4 leading-relaxed" >
                   Waiting for PHENOM OS — Africa's first AI Business Operating System.
                 </p>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
@@ -82,17 +82,17 @@ export default function WaitlistPopup() {
                       border: '1px solid rgba(255,255,255,0.1)',
                       fontFamily: 'DM Sans, sans-serif',
                     }}
-                    onFocus={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)' }}
+                    onFocus={e => { e.currentTarget.style.borderColor = 'rgba(131,231,238,0.5)' }}
                     onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
                   />
                   <button
                     type="submit"
                     className="w-full py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
                     style={{
-                      background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
+                      background: 'linear-gradient(135deg, #83e7ee, #0066cc)',
                       fontFamily: 'DM Sans, sans-serif',
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(124,58,237,0.4)' }}
+                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(131,231,238,0.4)' }}
                     onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none' }}
                   >
                     Join the Waitlist →
@@ -106,8 +106,8 @@ export default function WaitlistPopup() {
                     <PartyPopper size={32} />
                   </div>
                 </div>
-                <p className="font-bold text-white text-base" style={{ fontFamily: 'Sora, sans-serif' }}>You're on the list!</p>
-                <p className="text-white/50 text-sm mt-1" style={{ fontFamily: 'DM Sans, sans-serif' }}>We'll notify you when PHENOM OS launches.</p>
+                <p className="font-bold text-white text-base" >You're on the list!</p>
+                <p className="text-white/50 text-sm mt-1" >We'll notify you when PHENOM OS launches.</p>
               </motion.div>
             )}
           </div>

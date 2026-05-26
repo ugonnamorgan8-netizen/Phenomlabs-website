@@ -22,7 +22,7 @@ export default function ScrollToTop() {
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-24 right-6 z-50 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-lg transition-all"
-          style={{ background: 'linear-gradient(135deg, #7c3aed, #6d28d9)', boxShadow: '0 4px 20px rgba(124,58,237,0.35)' }}
+          style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)', boxShadow: '0 4px 20px rgba(0,102,204,0.35)' }}
           title="Scroll to top"
         >
           <ArrowUp size={18} />

@@ -44,7 +44,7 @@ function VortexParticles({ progress }: { progress: MotionValue<number> }) {
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#A855F7" // Brand violet
+        color="#0066cc" // Brand violet
         size={0.05}
         sizeAttenuation={true}
         depthWrite={false}

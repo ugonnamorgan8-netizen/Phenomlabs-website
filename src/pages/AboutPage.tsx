@@ -39,11 +39,11 @@ export default function AboutPage() {
             className="w-full h-full opacity-30"
           >
             {/* Human-designed abstract background pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(124,58,237,0.1)_0%,transparent_50%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.1)_0%,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(131,231,238,0.1)_0%,transparent_50%),radial-gradient(circle_at_80%_70%,rgba(0,102,204,0.1)_0%,transparent_50%)]" />
             <div className="dot-grid absolute inset-0 opacity-40" />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(131,231,238,0.1) 0%, transparent 70%)' }} />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -112,7 +112,7 @@ export default function AboutPage() {
               
               {/* Avatar */}
               <div className="w-32 h-32 rounded-[2.5rem] mx-auto mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl shadow-ph-purple/20 group-hover:scale-105 transition-transform duration-500"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #4c1d95)' }}>
+                style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)' }}>
                 M
               </div>
               <h3 className="font-display font-bold text-white text-3xl mb-2" style={{ fontFamily: 'Sora, sans-serif' }}>Morgan Ugonna Thankgod</h3>
@@ -150,7 +150,7 @@ export default function AboutPage() {
               {timeline.map((t, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={timelineInView ? { opacity: 1, x: 0 } : {}} transition={{ delay: i * 0.12 }}
                   className="flex gap-10 pl-14 relative group">
-                  <div className="absolute left-[18px] top-2 w-2.5 h-2.5 rounded-full border border-ph-purple bg-black shadow-[0_0_15px_rgba(124,58,237,0.6)] group-hover:scale-125 transition-transform" />
+                  <div className="absolute left-[18px] top-2 w-2.5 h-2.5 rounded-full border border-ph-purple bg-black shadow-[0_0_15px_rgba(131,231,238,0.6)] group-hover:scale-125 transition-transform" />
                   <div>
                     <span className="text-xs font-mono text-ph-purple-light font-black uppercase tracking-widest">{t.year}</span>
                     <p className="text-white/60 text-base mt-2 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{t.event}</p>

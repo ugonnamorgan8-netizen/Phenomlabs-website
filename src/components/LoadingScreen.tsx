@@ -33,11 +33,11 @@ export default function LoadingScreen({ onComplete }: Props) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-black"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-helix-blue-dark"
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
+            <div className="w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(131,231,238,0.1) 0%, transparent 70%)' }} />
           </div>
 
           {/* SVG Logo */}
@@ -65,8 +65,8 @@ export default function LoadingScreen({ onComplete }: Props) {
               </circle>
               <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#a78bfa" />
-                  <stop offset="100%" stopColor="#7c3aed" />
+                  <stop offset="0%" stopColor="#83e7ee" />
+                  <stop offset="100%" stopColor="#83e7ee" />
                 </linearGradient>
               </defs>
             </svg>
@@ -89,7 +89,7 @@ export default function LoadingScreen({ onComplete }: Props) {
             <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, #a78bfa, #7c3aed)', width: `${progress}%` }}
+                style={{ background: 'linear-gradient(90deg, #83e7ee, #83e7ee)', width: `${progress}%` }}
                 transition={{ ease: 'easeOut' }}
               />
             </div>

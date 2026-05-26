@@ -19,7 +19,7 @@ const buildLogs = [
   {
     id: 'frsc-automation',
     icon: Cpu,
-    iconColor: '#a78bfa',
+    iconColor: '#83e7ee',
     category: 'PROCESS AUTOMATION',
     date: '2025',
     readTime: '4 min read',
@@ -61,12 +61,12 @@ export default function BuildLogsSection() {
   const [featured, ...rest] = buildLogs
 
   return (
-    <section className="py-32 bg-black relative overflow-hidden" id="build-logs">
+    <section className="py-32 bg-helix-blue-dark relative overflow-hidden" id="build-logs">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="dot-grid absolute inset-0 opacity-20" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px]"
-          style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(131,231,238,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -88,7 +88,7 @@ export default function BuildLogsSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05]"
-              style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.025em' }}
+              
             >
               How We Built<br />
               <span className="gradient-text-purple">The Impossible.</span>
@@ -99,7 +99,7 @@ export default function BuildLogsSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               className="text-white/38 mt-5 text-base leading-relaxed max-w-lg"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
+              
             >
               Engineering breakdowns, deployment stories, and technical retrospectives from our real-world project work.
             </motion.p>
@@ -123,7 +123,7 @@ export default function BuildLogsSection() {
           whileHover={{ y: -4 }}
         >
           {/* Top accent */}
-          <div className="h-[2px] w-full" style={{ background: 'linear-gradient(to right, transparent, #a78bfa40, transparent)' }} />
+          <div className="h-[2px] w-full" style={{ background: 'linear-gradient(to right, transparent, #83e7ee40, transparent)' }} />
 
           <div className="p-8 lg:p-10">
             <div className="flex flex-col lg:flex-row gap-10">
@@ -149,10 +149,10 @@ export default function BuildLogsSection() {
                   </span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:text-ph-purple-light transition-colors duration-300"
-                  style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}>
+                  >
                   {featured.title}
                 </h3>
-                <p className="text-white/40 text-base leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                <p className="text-white/40 text-base leading-relaxed mb-6 max-w-2xl" >
                   {featured.excerpt}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -190,11 +190,11 @@ export default function BuildLogsSection() {
               >
                 {/* Hover glow */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: 'radial-gradient(ellipse at top left, rgba(124,58,237,0.06) 0%, transparent 70%)' }} />
+                  style={{ background: 'radial-gradient(ellipse at top left, rgba(131,231,238,0.06) 0%, transparent 70%)' }} />
 
                 <div className="flex items-center gap-3 mb-5 relative z-10">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/8"
-                    style={{ background: 'rgba(124,58,237,0.1)' }}>
+                    style={{ background: 'rgba(131,231,238,0.1)' }}>
                     <Icon size={18} style={{ color: log.iconColor }} />
                   </div>
                   <div>
@@ -204,11 +204,11 @@ export default function BuildLogsSection() {
                 </div>
 
                 <h4 className="text-base font-bold text-white mb-3 group-hover:text-ph-purple-light transition-colors duration-300 flex-1 relative z-10"
-                  style={{ fontFamily: 'Sora, sans-serif', lineHeight: 1.3 }}>
+                  >
                   {log.title}
                 </h4>
                 <p className="text-white/35 text-sm leading-relaxed mb-5 relative z-10"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  >
                   {log.excerpt}
                 </p>
 

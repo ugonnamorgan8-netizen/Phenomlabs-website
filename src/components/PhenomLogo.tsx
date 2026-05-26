@@ -1,4 +1,4 @@
-export const PhenomLogo = ({ className = "w-8 h-8", color = "#7c3aed" }: { className?: string; color?: string }) => {
+export const PhenomLogo = ({ className = "w-8 h-8", color = "#83e7ee" }: { className?: string; color?: string }) => {
   return (
     <svg 
       viewBox="0 0 100 100" 
@@ -29,7 +29,7 @@ export const PhenomLogo = ({ className = "w-8 h-8", color = "#7c3aed" }: { class
   );
 };
 
-export const PhenomIcon = ({ className = "w-6 h-6", color = "#7c3aed" }: { className?: string; color?: string }) => {
+export const PhenomIcon = ({ className = "w-6 h-6", color = "#83e7ee" }: { className?: string; color?: string }) => {
   return (
     <svg 
       viewBox="0 0 24 24" 

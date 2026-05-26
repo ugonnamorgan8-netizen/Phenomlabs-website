@@ -1,77 +1,8 @@
 import { useRef, useMemo } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial, Text } from '@react-three/drei'
+import { Points, PointMaterial, Text, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { MotionValue } from 'framer-motion'
-
-/* ── Glowing Diamond Core ── */
-function DiamondCore() {
-  const coreRef = useRef<THREE.Mesh>(null)
-  useFrame((state) => {
-    if (coreRef.current) {
-      coreRef.current.rotation.y = state.clock.getElapsedTime() * 0.5
-      coreRef.current.rotation.x = state.clock.getElapsedTime() * 0.3
-    }
-  })
-  return (
-    <mesh ref={coreRef}>
-      <icosahedronGeometry args={[1.2, 0]} />
-      <meshStandardMaterial 
-        color="#ffffff"
-        emissive="#ffffff"
-        emissiveIntensity={0.6}
-        metalness={0.8}
-        roughness={0.1}
-        wireframe={true}
-      />
-    </mesh>
-  )
-}
-
-/* ── Evaporating Neural Codes ── */
-function EvaporatingCodes() {
-  const groupRef = useRef<THREE.Group>(null)
-  
-  const codes = useMemo(() => {
-    const chars = ['0', '1', '{', '}', 'AI', 'OS', 'void', 'auto']
-    return Array.from({ length: 45 }).map(() => ({
-      text: chars[Math.floor(Math.random() * chars.length)],
-      x: (Math.random() - 0.5) * 2.5,
-      y: (Math.random() - 0.5) * 2.5,
-      z: (Math.random() - 0.5) * 2.5,
-      speed: 0.005 + Math.random() * 0.015,
-      scale: 0.08 + Math.random() * 0.1
-    }))
-  }, [])
-
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.children.forEach((child, i) => {
-        child.position.y += codes[i].speed
-        // Move slightly outwards
-        child.position.x += child.position.x * 0.002
-        child.position.z += child.position.z * 0.002
-        
-        // Reset when too far
-        if (child.position.y > 3 || Math.abs(child.position.x) > 3) {
-          child.position.y = (Math.random() - 0.5) * 1
-          child.position.x = (Math.random() - 0.5) * 1.5
-          child.position.z = (Math.random() - 0.5) * 1.5
-        }
-      })
-    }
-  })
-
-  return (
-    <group ref={groupRef}>
-      {codes.map((code, i) => (
-        <Text key={i} position={[code.x, code.y, code.z]} scale={code.scale} color="#ffffff" fillOpacity={0.8}>
-          {code.text}
-        </Text>
-      ))}
-    </group>
-  )
-}
 
 /* ── PHENOM LABS Text Ring ── */
 function TextRing() {
@@ -98,7 +29,7 @@ function TextRing() {
             position={[Math.cos(angle) * radius, 0, Math.sin(angle) * radius]}
             rotation={[0, -angle - Math.PI / 2, 0]}
             fontSize={0.35}
-            color="#A855F7"
+            color="#0066cc"
             anchorX="center"
             anchorY="middle"
           >
@@ -107,6 +38,110 @@ function TextRing() {
         )
       })}
     </group>
+  )
+}
+
+/* ── Evaporating Particles (Logos & Tech) ── */
+function EvaporatingParticles({ scrollProgress }: { scrollProgress?: MotionValue<number> | number }) {
+  const groupRef = useRef<THREE.Group>(null)
+  
+  const particles = useMemo(() => {
+    const items = [
+      { type: 'text', content: '<html>', color: '#e34f26' },
+      { type: 'text', content: 'console.log()', color: '#f7df1e' },
+      { type: 'text', content: 'def init():', color: '#3776ab' },
+      { type: 'text', content: '.css {}', color: '#1572b6' },
+      { type: 'text', content: 'std::cout', color: '#00599c' },
+      { type: 'logo', content: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg' },
+      { type: 'logo', content: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Claude_AI_logo.svg' },
+      { type: 'logo', content: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg' }
+    ]
+    return Array.from({ length: 45 }).map(() => {
+      const item = items[Math.floor(Math.random() * items.length)]
+      return {
+        ...item,
+        x: (Math.random() - 0.5) * 1.5,
+        y: (Math.random() - 0.5) * 1.5,
+        z: (Math.random() - 0.5) * 1.5,
+        speed: 0.01 + Math.random() * 0.02,
+        scale: item.type === 'logo' ? 0.3 + Math.random() * 0.2 : 0.15 + Math.random() * 0.15,
+        phaseX: Math.random() * Math.PI * 2,
+        phaseZ: Math.random() * Math.PI * 2,
+      }
+    })
+  }, [])
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime()
+    const sp = typeof scrollProgress === 'number' ? scrollProgress : scrollProgress?.get() || 0
+    
+    if (groupRef.current) {
+      groupRef.current.children.forEach((child, i) => {
+        const p = particles[i]
+        
+        // Evaporate only when globe starts splitting (sp > 0.3)
+        if (sp > 0.3) {
+          // Accelerate upwards
+          child.position.y += p.speed + (sp * 0.02)
+          child.position.x += Math.sin(time + p.phaseX) * 0.01
+          child.position.z += Math.cos(time + p.phaseZ) * 0.01
+          
+          // Reset position if it goes too high
+          if (child.position.y > 4) {
+            child.position.y = (Math.random() - 0.5) * 1
+            child.position.x = (Math.random() - 0.5) * 1.5
+            child.position.z = (Math.random() - 0.5) * 1.5
+          }
+          child.visible = true
+        } else {
+          // Keep hidden inside the core
+          child.position.y = p.y
+          child.position.x = p.x
+          child.position.z = p.z
+          child.visible = false
+        }
+      })
+    }
+  })
+
+  return (
+    <group ref={groupRef}>
+      {particles.map((p, i) => (
+        p.type === 'text' ? (
+          <Text key={i} position={[p.x, p.y, p.z]} scale={p.scale} color={p.color} fillOpacity={0.9} fontWeight="bold">
+            {p.content}
+          </Text>
+        ) : (
+          <Html key={i} position={[p.x, p.y, p.z]} transform scale={p.scale} occlude="blending">
+            <img src={p.content} alt="logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+          </Html>
+        )
+      ))}
+    </group>
+  )
+}
+
+/* ── Glowing Diamond Core ── */
+function DiamondCore() {
+  const coreRef = useRef<THREE.Mesh>(null)
+  useFrame((state) => {
+    if (coreRef.current) {
+      coreRef.current.rotation.y = state.clock.getElapsedTime() * 0.5
+      coreRef.current.rotation.x = state.clock.getElapsedTime() * 0.3
+    }
+  })
+  return (
+    <mesh ref={coreRef}>
+      <icosahedronGeometry args={[1.2, 0]} />
+      <meshStandardMaterial 
+        color="#ffffff"
+        emissive="#ffffff"
+        emissiveIntensity={0.6}
+        metalness={0.8}
+        roughness={0.1}
+        wireframe={true}
+      />
+    </mesh>
   )
 }
 
@@ -198,10 +233,13 @@ function NeuralSphere({ mouse, scrollProgress }: { mouse: React.MutableRefObject
     if (meshRef.current) {
       meshRef.current.rotation.y = t * 0.15
       meshRef.current.rotation.x = Math.sin(t * 0.1) * 0.1 + mouse.current[1] * 0.1
+      // Scroll moves the globe slightly
+      meshRef.current.position.y = -sp * 2
+      meshRef.current.position.z = sp * 5
     }
 
     // Bisection Logic: Move halves apart based on scrollProgress
-    const splitDistance = sp * 10
+    const splitDistance = sp * 8
     if (leftGroup.current) leftGroup.current.position.x = -splitDistance
     if (rightGroup.current) rightGroup.current.position.x = splitDistance
     
@@ -215,24 +253,24 @@ function NeuralSphere({ mouse, scrollProgress }: { mouse: React.MutableRefObject
     <group ref={meshRef}>
       <group ref={leftGroup}>
         <lineSegments geometry={leftLineGeo}>
-          <lineBasicMaterial color="#7C3AED" transparent opacity={0.4} />
+          <lineBasicMaterial color="#83e7ee" transparent opacity={0.4} />
         </lineSegments>
         <points geometry={leftNodeGeo}>
-          <pointsMaterial color="#A855F7" size={0.08} sizeAttenuation transparent opacity={0.9} />
+          <pointsMaterial color="#83e7ee" size={0.08} sizeAttenuation transparent opacity={0.9} />
         </points>
       </group>
 
       <group ref={rightGroup}>
         <lineSegments geometry={rightLineGeo}>
-          <lineBasicMaterial color="#7C3AED" transparent opacity={0.4} />
+          <lineBasicMaterial color="#83e7ee" transparent opacity={0.4} />
         </lineSegments>
         <points geometry={rightNodeGeo}>
-          <pointsMaterial color="#A855F7" size={0.08} sizeAttenuation transparent opacity={0.9} />
+          <pointsMaterial color="#83e7ee" size={0.08} sizeAttenuation transparent opacity={0.9} />
         </points>
       </group>
 
       <DiamondCore />
-      <EvaporatingCodes />
+      <EvaporatingParticles scrollProgress={scrollProgress} />
     </group>
   )
 }
@@ -262,7 +300,7 @@ function AmbientParticles({ scrollProgress }: { scrollProgress?: MotionValue<num
 
   return (
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial transparent color="#7C3AED" size={0.03} sizeAttenuation depthWrite={false} opacity={0.4} />
+      <PointMaterial transparent color="#83e7ee" size={0.03} sizeAttenuation depthWrite={false} opacity={0.4} />
     </Points>
   )
 }
@@ -293,8 +331,8 @@ export default function NeuralNetwork3D({ mouse, scrollProgress }: { mouse: Reac
         style={{ background: 'transparent', pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.4} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#7C3AED" />
-        <pointLight position={[-10, -10, -10]} intensity={1} color="#A855F7" />
+        <pointLight position={[10, 10, 10]} intensity={1.5} color="#83e7ee" />
+        <pointLight position={[-10, -10, -10]} intensity={1} color="#0066cc" />
         
         <MouseTracker mouse={mouse} scrollProgress={scrollProgress} />
         <NeuralSphere mouse={mouse} scrollProgress={scrollProgress} />

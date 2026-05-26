@@ -21,9 +21,9 @@ const steps = [
 ]
 
 const pricing = [
-  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#a78bfa', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
-  { name: 'Business', price: '₦9,999', period: '/month', color: '#7c3aed', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
-  { name: 'Enterprise', price: 'Custom', period: 'Contact Us', color: '#4c1d95', features: ['All Business Features', 'Sales Forecasting', 'Funding Matching', 'Custom Integrations', 'Dedicated Account Manager'] },
+  { name: 'Starter', price: '₦0', period: 'Free Forever', color: '#83e7ee', features: ['WhatsApp AI Queries (50/mo)', 'Basic Invoice Generation', 'Sales Summary Reports', 'Community Support'] },
+  { name: 'Business', price: '₦9,999', period: '/month', color: '#0066cc', popular: true, features: ['Unlimited AI Queries', 'Full Invoice & Payment Tracking', 'Automated Customer Follow-ups', 'Business Plan Generator', 'Priority Support'] },
+  { name: 'Enterprise', price: 'Custom', period: 'Contact Us', color: '#0a121c', features: ['All Business Features', 'Sales Forecasting', 'Funding Matching', 'Custom Integrations', 'Dedicated Account Manager'] },
 ]
 
 const faqs = [
@@ -37,7 +37,7 @@ const faqs = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border border-white/8 rounded-xl overflow-hidden transition-all duration-300" style={{ background: open ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+    <div className="border border-white/8 rounded-xl overflow-hidden transition-all duration-300" style={{ background: open ? 'rgba(0, 102, 204, 0.05)' : 'transparent' }}>
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/3 transition-colors">
         <span className="font-semibold text-white text-base" style={{ fontFamily: 'Sora, sans-serif' }}>{q}</span>
         <motion.div animate={{ rotate: open ? 180 : 0 }}>
@@ -76,7 +76,7 @@ export default function PhenomOSPage() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20">
         {/* Background Layers */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 70%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 100% 80% at 50% 0%, rgba(131,231,238,0.12) 0%, transparent 70%)' }} />
         <div className="grid-lines absolute inset-0 opacity-15 pointer-events-none" />
         <div className="aurora-1 absolute inset-0 pointer-events-none opacity-30" />
 
@@ -183,7 +183,7 @@ export default function PhenomOSPage() {
               <motion.div key={s.n} initial={{ opacity: 0, y: 30 }} animate={stepsInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.15 }}
                 className="text-center group">
                 <div className="w-20 h-20 rounded-3xl mx-auto mb-8 flex items-center justify-center font-display font-black text-2xl text-white shadow-xl shadow-ph-purple/10 transition-transform duration-500 group-hover:scale-110"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #4c1d95)' }}>
+                  style={{ background: 'linear-gradient(135deg, #0066cc, #0a121c)' }}>
                   {s.n}
                 </div>
                 <h3 className="font-display font-bold text-white text-xl mb-4" style={{ fontFamily: 'Sora, sans-serif' }}>{s.title}</h3>
@@ -235,7 +235,7 @@ export default function PhenomOSPage() {
                 style={{ background: p.popular ? 'rgba(15, 10, 30, 0.6)' : 'rgba(10, 10, 10, 0.6)' }}>
                 {p.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-widest"
-                    style={{ background: 'linear-gradient(135deg, #7c3aed, #4c1d95)' }}>
+                    style={{ background: 'linear-gradient(135deg, #0066cc, #0a121c)' }}>
                     Most Popular
                   </div>
                 )}

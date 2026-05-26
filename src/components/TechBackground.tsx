@@ -52,7 +52,7 @@ export default function TechBackground() {
             style={{ 
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              boxShadow: '0 0 8px rgba(124, 58, 237, 0.4)'
+              boxShadow: '0 0 8px rgba(131,231,238, 0.4)'
             }}
           />
         ))}
@@ -60,7 +60,7 @@ export default function TechBackground() {
 
       {/* Radial Gradient Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(124,58,237,0.03)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(131,231,238,0.03)_100%)]" />
     </div>
   )
 }

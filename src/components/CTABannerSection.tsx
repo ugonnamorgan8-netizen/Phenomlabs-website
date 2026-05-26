@@ -4,7 +4,7 @@ import { MessageSquare, ArrowRight } from 'lucide-react'
 
 export default function CTABannerSection() {
   return (
-    <section className="py-40 relative overflow-hidden bg-black">
+    <section className="py-40 relative overflow-hidden bg-helix-blue-dark">
       {/* Background visual drama */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-ph-violet/5 to-black" />
       <div className="orb w-[1000px] h-[1000px] bg-ph-violet/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -22,12 +22,12 @@ export default function CTABannerSection() {
             The Future is Intelligent
           </motion.span>
           
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-10 leading-[0.92] text-balance" style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.03em' }}>
+          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-10 leading-[0.92] text-balance" >
             Let’s Build <br />
-            <span className="gradient-text-brand drop-shadow-[0_0_30px_rgba(124,58,237,0.3)]">The Impossible.</span>
+            <span className="gradient-text-brand drop-shadow-[0_0_30px_rgba(131,231,238,0.3)]">The Impossible.</span>
           </h2>
           
-          <p className="text-white/40 text-xl mb-14 max-w-xl mx-auto leading-relaxed text-balance" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+          <p className="text-white/40 text-xl mb-14 max-w-xl mx-auto leading-relaxed text-balance" >
             Join the ranks of forward-thinking African organizations leveraging tactical AI to outpace the competition.
           </p>
 

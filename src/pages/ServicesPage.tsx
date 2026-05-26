@@ -8,7 +8,7 @@ import ParticleVortex3D from '../components/ParticleVortex3D'
 function PageHero({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.1) 0%, #000 70%)' }} />
+      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(131,231,238,0.1) 0%, #000 70%)' }} />
       <div className="dot-grid absolute inset-0 opacity-30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-[1000px]">
-              {learnServices.map(s => <ServiceCard key={s.name} {...s} color="#7C3AED" />)}
+              {learnServices.map(s => <ServiceCard key={s.name} {...s} color="#83e7ee" />)}
             </div>
           </div>
         </section>
@@ -128,7 +128,7 @@ export default function ServicesPage() {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-[1000px]">
-            {buildServices.map(s => <ServiceCard key={s.name} {...s} color="#A855F7" />)}
+            {buildServices.map(s => <ServiceCard key={s.name} {...s} color="#0066cc" />)}
           </div>
         </div>
       </section>
@@ -136,8 +136,8 @@ export default function ServicesPage() {
       {/* PHENOM OS Preview */}
       <section className="py-20 relative bg-black/60 backdrop-blur-lg border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl p-12 text-center relative overflow-hidden border border-ph-violet/20 shadow-[0_0_50px_rgba(124,58,237,0.1)]"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(168,85,247,0.02) 100%)' }}>
+          <div className="rounded-2xl p-12 text-center relative overflow-hidden border border-ph-violet/20 shadow-[0_0_50px_rgba(131,231,238,0.1)]"
+            style={{ background: 'linear-gradient(135deg, rgba(131,231,238,0.08) 0%, rgba(0,102,204,0.02) 100%)' }}>
             <div className="absolute inset-0 grid-lines opacity-10" />
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-ph-purple border border-ph-violet/40 bg-ph-violet/10 mb-6 animate-pulse">COMING 2026</span>
               <div className="flex justify-center mb-6">
@@ -149,7 +149,7 @@ export default function ServicesPage() {
               <p className="text-ph-violet font-semibold tracking-wide uppercase text-sm mb-6">Africa's First AI Business Operating System</p>
               <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">AI Accounting, WhatsApp Intelligence, Customer Automation, and Business Planning — all in one powerful system built for African SMEs.</p>
               <a href="/phenom-os" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-sm hover:scale-105 transition-transform"
-                style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+                style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)' }}>
                 Experience the Future <ArrowRight size={16} />
               </a>
           </div>

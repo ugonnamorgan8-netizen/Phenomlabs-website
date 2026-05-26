@@ -12,7 +12,7 @@ const projects = [
     problem: 'Staff spent 2–3 hours daily manually checking and filing FRSC training records across multiple spreadsheets.',
     result: 'Full automation reduced daily compliance work to under 5 minutes with zero human error.',
     tech: ['Python', 'Playwright', 'Automation', 'FRSC API'],
-    color: '#a78bfa',
+    color: '#83e7ee',
     stat: { label: 'Time Saved Daily', value: '95%' },
   },
   {
@@ -23,7 +23,7 @@ const projects = [
     problem: 'Patients in rural Abia communities lacked access to consistent healthcare due to geographic and infrastructure barriers.',
     result: 'Digital platform enabling remote consultations, cutting patient wait times and expanding healthcare reach significantly.',
     tech: ['React', 'Node.js', 'PostgreSQL', 'AI Integration'],
-    color: '#7c3aed',
+    color: '#0066cc',
     stat: { label: 'Healthcare Reach', value: '10x' },
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     problem: 'School administration was entirely paper-based — enrollment, fees, and records were scattered across physical files.',
     result: 'All school operations centralized into one digital platform, eliminating paperwork and improving data accuracy.',
     tech: ['React', 'Express', 'MySQL', 'PDF Generation'],
-    color: '#4c1d95',
+    color: '#0a121c',
     stat: { label: 'Admin Efficiency', value: '80%↑' },
   },
 ]
@@ -147,11 +147,11 @@ export default function PortfolioPage() {
             className="w-full h-full opacity-30"
           >
             {/* Human-designed abstract background pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(124,58,237,0.1)_0%,transparent_50%),radial-gradient(circle_at_30%_80%,rgba(168,85,247,0.1)_0%,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(131,231,238,0.1)_0%,transparent_50%),radial-gradient(circle_at_30%_80%,rgba(0,102,204,0.1)_0%,transparent_50%)]" />
             <div className="dot-grid absolute inset-0 opacity-40" />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(124,58,237,0.08) 0%, transparent 70%)' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(131,231,238,0.08) 0%, transparent 70%)' }} />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">

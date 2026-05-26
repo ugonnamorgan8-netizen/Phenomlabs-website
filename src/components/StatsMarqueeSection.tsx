@@ -37,7 +37,7 @@ export default function StatsMarqueeSection() {
   const { ref, inView } = useInView()
 
   return (
-    <div className="bg-black relative">
+    <div className="bg-helix-blue-dark relative">
       {/* High-End Marquee Ticker */}
       <div className="py-6 border-y border-white/5 marquee-container bg-ph-space overflow-hidden">
         <div className="marquee-content items-center">

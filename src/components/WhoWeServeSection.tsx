@@ -36,7 +36,7 @@ const industries = [
 
 export default function WhoWeServeSection() {
   return (
-    <section className="py-24 bg-black relative">
+    <section className="py-24 bg-helix-blue-dark relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
@@ -54,7 +54,7 @@ export default function WhoWeServeSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl font-bold text-white"
-              style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}
+              
             >
               Intelligence For <span className="gradient-text-purple">Every Domain</span>
             </motion.h2>
@@ -64,7 +64,7 @@ export default function WhoWeServeSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-white/35 max-w-xs text-sm leading-relaxed"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            
           >
             We deploy tactical AI across diverse ecosystems to drive continental growth.
           </motion.p>
@@ -78,22 +78,22 @@ export default function WhoWeServeSection() {
               whileInView={{ opacity: 1 }}
               transition={{ delay: i * 0.06 }}
               viewport={{ once: true }}
-              className="group p-9 bg-black hover:bg-white/[0.02] transition-all duration-400 relative overflow-hidden"
+              className="group p-9 bg-helix-blue-dark hover:bg-white/[0.02] transition-all duration-400 relative overflow-hidden"
             >
               {/* Top accent line on hover */}
               <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-ph-purple/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
               <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-7 transition-colors duration-400"
-                style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.12)' }}>
+                style={{ background: 'rgba(131,231,238,0.08)', border: '1px solid rgba(131,231,238,0.12)' }}>
                 <span className="text-ph-purple-light">{item.icon}</span>
               </div>
 
               <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-ph-purple-light transition-colors"
-                style={{ fontFamily: 'Sora, sans-serif' }}>
+                >
                 {item.label}
               </h3>
 
-              <p className="text-white/38 text-sm leading-relaxed max-w-[240px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <p className="text-white/38 text-sm leading-relaxed max-w-[240px]" >
                 {item.desc}
               </p>
 

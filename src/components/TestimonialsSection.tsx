@@ -24,7 +24,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-32 bg-black relative">
+    <section className="py-32 bg-helix-blue-dark relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="text-center mb-20">
@@ -42,7 +42,7 @@ export default function TestimonialsSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl font-bold text-white"
-            style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}
+            
           >
             Trusted by <span className="gradient-text-purple">Visionaries.</span>
           </motion.h2>
@@ -56,30 +56,30 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="p-10 bg-black hover:bg-white/[0.02] transition-all duration-400 relative"
+              className="p-10 bg-helix-blue-dark hover:bg-white/[0.02] transition-all duration-400 relative"
             >
               {/* Purple top accent on hover */}
               <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-ph-purple/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-              <Quote className="mb-6 opacity-20" size={28} style={{ color: '#a78bfa' }} />
+              <Quote className="mb-6 opacity-20" size={28} style={{ color: '#83e7ee' }} />
 
               <div className="flex gap-1 mb-5">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} size={12} style={{ fill: '#a78bfa', color: '#a78bfa' }} />
+                  <Star key={j} size={12} style={{ fill: '#83e7ee', color: '#83e7ee' }} />
                 ))}
               </div>
 
-              <p className="text-white/58 text-base leading-relaxed mb-10 italic" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <p className="text-white/58 text-base leading-relaxed mb-10 italic" >
                 "{t.text}"
               </p>
 
               <div className="flex items-center gap-3.5">
                 <div className="w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.2)' }}>
-                  <span className="text-ph-purple-light font-bold text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>{t.initials}</span>
+                  style={{ background: 'rgba(131,231,238,0.12)', border: '1px solid rgba(131,231,238,0.2)' }}>
+                  <span className="text-ph-purple-light font-bold text-sm" >{t.initials}</span>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>{t.name}</h4>
+                  <h4 className="text-white font-semibold text-sm" >{t.name}</h4>
                   <p className="text-white/22 text-[9px] font-mono uppercase tracking-widest mt-0.5">{t.role}</p>
                 </div>
               </div>

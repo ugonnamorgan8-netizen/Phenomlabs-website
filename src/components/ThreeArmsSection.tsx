@@ -1,23 +1,68 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { BookOpen, Code, Cpu, X, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+
+function ZoomHeading() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+
+  // Zoom in + fade in as section enters viewport — no blur
+  const scale = useTransform(scrollYProgress, [0, 0.4], [0.5, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1])
+
+  return (
+    <div ref={ref} className="text-center mb-16">
+      <motion.span
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-helix-cyan/30 bg-helix-cyan/10 text-[#83e7ee] text-sm font-semibold mb-6"
+      >
+        Our Ecosystem
+      </motion.span>
+
+      {/* Scroll-zoom headline */}
+      <motion.h2
+        style={{ scale, opacity }}
+        className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-5 tracking-tight leading-tight"
+      >
+        The PHENOM{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#83e7ee] to-[#0066cc]">
+          Core
+        </span>
+      </motion.h2>
+
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="text-helix-accent/60 max-w-lg mx-auto font-medium text-lg"
+      >
+        Three specialized arms designed to transition Africa into an AI-first continent.{' '}
+        <span className="text-[#83e7ee]/80">Click any card to learn more.</span>
+      </motion.p>
+    </div>
+  )
+}
 
 const arms = [
   {
     id: 'learn',
     title: 'LEARN',
     icon: BookOpen,
-    iconColor: '#a78bfa',
+    iconColor: '#83e7ee',
     subtitle: 'AI Education & Literacy',
     tagline: "Empowering Africa's next generation",
     description: 'Empowering the next generation of African talent with AI literacy and high-end tech skills.',
-    color: 'from-ph-purple/15 to-transparent',
+    color: 'from-helix-cyan/15 to-transparent',
     link: '/services',
-    accent: '#a78bfa',
-    fullDescription: `PHENOM LEARN is our flagship education and literacy arm, designed to close the AI skills gap across Africa. We deliver structured, outcome-driven training programs that transform complete beginners into confident AI practitioners.
-
-Our curriculum is built around practical application — not theory. Students leave with portfolios, certifications, and the confidence to deploy AI tools in their professional lives.`,
+    accent: '#83e7ee',
+    fullDescription: `PHENOM LEARN is our flagship education and literacy arm, designed to close the AI skills gap across Africa. We deliver structured, outcome-driven training programs that transform complete beginners into confident AI practitioners.\n\nOur curriculum is built around practical application — not theory. Students leave with portfolios, certifications, and the confidence to deploy AI tools in their professional lives.`,
     offerings: [
       'AI Fundamentals & Core Concepts',
       'Prompt Engineering Mastery',
@@ -38,16 +83,14 @@ Our curriculum is built around practical application — not theory. Students le
     id: 'build',
     title: 'BUILD',
     icon: Code,
-    iconColor: '#c4b5fd',
+    iconColor: '#0066cc',
     subtitle: 'AI Software Engineering',
     tagline: 'Custom intelligence, engineered for you',
     description: 'Engineering bespoke software and AI agents tailored for African business challenges.',
-    color: 'from-ph-purple/20 to-transparent',
+    color: 'from-helix-blue/20 to-transparent',
     link: '/services',
-    accent: '#c4b5fd',
-    fullDescription: `PHENOM BUILD is our software engineering and development arm. We design, architect, and ship production-grade software powered by AI — from intelligent web applications to full-scale SaaS platforms.
-
-We work as a strategic technical partner, not just a vendor. Every project is shaped around your specific business context, users, and growth trajectory.`,
+    accent: '#0066cc',
+    fullDescription: `PHENOM BUILD is our software engineering and development arm. We design, architect, and ship production-grade software powered by AI — from intelligent web applications to full-scale SaaS platforms.\n\nWe work as a strategic technical partner, not just a vendor. Every project is shaped around your specific business context, users, and growth trajectory.`,
     offerings: [
       'Custom AI Agents & Chatbots',
       'Web & Mobile Applications',
@@ -68,16 +111,14 @@ We work as a strategic technical partner, not just a vendor. Every project is sh
     id: 'automate',
     title: 'AUTOMATE',
     icon: Cpu,
-    iconColor: '#ede9fe',
+    iconColor: '#fcfcfc',
     subtitle: 'Efficiency at Scale',
     tagline: 'Your business on autopilot',
     description: 'Scaling efficiency with our flagship PHENOM OS and custom automation pipelines.',
     color: 'from-white/5 to-transparent',
     link: '/phenom-os',
-    accent: '#e2e8f0',
-    fullDescription: `PHENOM AUTOMATE is the operational intelligence arm of Phenom Labs. Through our flagship PHENOM OS platform and bespoke automation pipelines, we eliminate repetitive work and give business owners their time back.
-
-PHENOM OS functions as a Digital COO — managing customer pipelines, lead follow-ups, appointment scheduling, content generation, reporting, and more, all from one dashboard.`,
+    accent: '#fcfcfc',
+    fullDescription: `PHENOM AUTOMATE is the operational intelligence arm of Phenom Labs. Through our flagship PHENOM OS platform and bespoke automation pipelines, we eliminate repetitive work and give business owners their time back.\n\nPHENOM OS functions as a Digital COO — managing customer pipelines, lead follow-ups, appointment scheduling, content generation, reporting, and more, all from one dashboard.`,
     offerings: [
       'PHENOM OS — Digital COO Platform',
       'WhatsApp Business Automation',
@@ -105,7 +146,7 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="modal-overlay"
+      className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-[#0a121c]/80 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -113,50 +154,45 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 24, scale: 0.97 }}
         transition={{ type: 'spring', damping: 28, stiffness: 240 }}
-        className="modal-panel no-scrollbar"
+        className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#030811] border border-helix-stroke shadow-2xl relative"
         onClick={e => e.stopPropagation()}
       >
-        {/* Top accent */}
-        <div className="h-[3px] w-full rounded-t-2xl" style={{ background: `linear-gradient(to right, transparent, ${arm.accent}, transparent)` }} />
+        <div className="h-[3px] w-full rounded-t-3xl" style={{ background: `linear-gradient(to right, transparent, ${arm.accent}, transparent)` }} />
 
         <div className="p-8">
-          {/* Header */}
           <div className="flex items-start justify-between mb-7">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center border border-white/8" style={{ background: `rgba(124,58,237,0.12)` }}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10" style={{ background: `rgba(255,255,255,0.05)` }}>
                 <Icon size={28} style={{ color: arm.iconColor }} />
               </div>
               <div>
-                <p className="text-xs font-mono uppercase tracking-widest text-white/30 mb-1">{arm.subtitle}</p>
-                <h3 className="text-2xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>PHENOM {arm.title}</h3>
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#83e7ee] mb-1">{arm.subtitle}</p>
+                <h3 className="text-3xl font-bold text-white tracking-tight" >PHENOM {arm.title}</h3>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 text-white/40 hover:text-white hover:bg-white/8 transition-all flex-shrink-0"
+              className="w-10 h-10 rounded-full flex items-center justify-center border border-helix-stroke text-helix-accent/50 hover:text-white hover:bg-white/10 transition-all flex-shrink-0"
               aria-label="Close"
             >
-              <X size={16} />
+              <X size={18} />
             </button>
           </div>
 
-          {/* Tagline */}
-          <p className="text-lg font-semibold text-white/85 mb-4 leading-snug" style={{ fontFamily: 'Sora, sans-serif' }}>
+          <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#83e7ee] to-[#0066cc] mb-4 leading-snug" >
             {arm.tagline}
           </p>
 
-          {/* Full description */}
-          <p className="text-white/50 text-sm leading-relaxed mb-7 whitespace-pre-line" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+          <p className="text-white/80 text-base leading-relaxed mb-8 whitespace-pre-line font-medium" >
             {arm.fullDescription}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 mb-8">
-            {/* Offerings */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
             <div>
-              <h4 className="text-xs font-mono uppercase tracking-widest text-white/25 mb-4">What's Included</h4>
-              <ul className="space-y-2.5">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#83e7ee] mb-4">What's Included</h4>
+              <ul className="space-y-3">
                 {arm.offerings.map(o => (
-                  <li key={o} className="flex items-start gap-2.5 text-sm text-white/65" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  <li key={o} className="flex items-start gap-3 text-sm font-medium text-white/70" >
                     <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: arm.accent }} />
                     {o}
                   </li>
@@ -164,13 +200,12 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
               </ul>
             </div>
 
-            {/* Outcomes */}
             <div>
-              <h4 className="text-xs font-mono uppercase tracking-widest text-white/25 mb-4">What You Get</h4>
-              <ul className="space-y-2.5">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#0066cc] mb-4">What You Get</h4>
+              <ul className="space-y-3">
                 {arm.outcomes.map(o => (
-                  <li key={o} className="flex items-start gap-2.5 text-sm text-white/65" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                    <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0" style={{ color: arm.accent }} />
+                  <li key={o} className="flex items-start gap-3 text-sm font-medium text-white/70" >
+                    <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0" style={{ color: arm.accent }} />
                     {o}
                   </li>
                 ))}
@@ -178,26 +213,18 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
             </div>
           </div>
 
-          {/* Audience */}
-          <div className="rounded-xl p-4 mb-7 border border-white/6" style={{ background: 'rgba(124,58,237,0.06)' }}>
-            <p className="text-xs font-mono uppercase tracking-widest text-white/25 mb-2">Best For</p>
-            <p className="text-sm text-white/60 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{arm.audience}</p>
+          <div className="rounded-2xl p-5 mb-8 border border-helix-stroke bg-white/5">
+            <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#83e7ee] mb-2">Best For</p>
+            <p className="text-sm font-medium text-white/70 leading-relaxed" >{arm.audience}</p>
           </div>
 
-          {/* CTA */}
           <Link
             to={arm.link}
             onClick={onClose}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all"
-            style={{
-              background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-              fontFamily: 'DM Sans, sans-serif',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.4)' }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none' }}
+            className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white transition-all bg-[#0066cc] hover:bg-blue-600 shadow-lg shadow-[#0066cc]/20"
           >
             Explore {arm.title === 'AUTOMATE' ? 'PHENOM OS' : `PHENOM ${arm.title}`}
-            <ArrowRight size={15} />
+            <ArrowRight size={16} />
           </Link>
         </div>
       </motion.div>
@@ -205,105 +232,75 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
   )
 }
 
+
 export default function ThreeArmsSection() {
   const [activeArm, setActiveArm] = useState<Arm | null>(null)
 
   return (
-    <section className="py-24 relative overflow-hidden bg-black">
-      {/* Subtle purple orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5 blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)' }} />
+    <section className="bg-helix-blue-dark relative" id="core-pillars">
+      {/* Main Core Section */}
+      <div className="py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #83e7ee 0%, transparent 70%)' }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block mb-4 tag-purple"
-          >
-            Our Ecosystem
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-bold text-white mb-5"
-            style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.02em' }}
-          >
-            The PHENOM <span className="gradient-text-purple">Core</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.18 }}
-            className="text-white/45 max-w-lg mx-auto"
-            style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem' }}
-          >
-            Three specialized arms designed to transition Africa into an AI-first continent.{' '}
-            <span className="text-white/60">Click any card to learn more.</span>
-          </motion.p>
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <ZoomHeading />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {arms.map((arm, index) => {
-            const Icon = arm.icon
-            return (
-              <motion.button
-                key={arm.title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                onClick={() => setActiveArm(arm)}
-                className="glass-morphism rounded-3xl p-8 border border-white/6 hover:border-ph-purple/20 transition-all duration-500 group relative overflow-hidden text-left cursor-pointer w-full"
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.99 }}
-              >
-                {/* Hover glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at center, rgba(124,58,237,0.07) 0%, transparent 70%)` }} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {arms.map((arm, index) => {
+              const Icon = arm.icon
+              return (
+                <motion.button
+                  key={arm.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  onClick={() => setActiveArm(arm)}
+                  className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-helix-stroke hover:border-[#83e7ee]/40 transition-all duration-500 group relative overflow-hidden text-left cursor-pointer w-full shadow-xl shadow-black/10"
+                  whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: `radial-gradient(circle at top right, ${arm.iconColor}15 0%, transparent 70%)` }} />
 
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-400 border border-white/8"
-                    style={{ background: 'rgba(124,58,237,0.1)' }}>
-                    <Icon size={26} style={{ color: arm.iconColor }} />
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-500 border border-white/10 bg-white/5">
+                      <Icon size={26} style={{ color: arm.iconColor }} />
+                    </div>
+
+                    <div className="mb-6">
+                      <p className="text-[10px] font-mono font-bold tracking-widest text-[#83e7ee] uppercase mb-3">{arm.subtitle}</p>
+                      <h4 className="text-2xl font-bold text-white tracking-tight group-hover:text-[#83e7ee] transition-colors" >
+                        {arm.title}
+                      </h4>
+                    </div>
+
+                    <p className="text-helix-accent/60 mb-8 font-medium leading-relaxed" >
+                      {arm.description}
+                    </p>
+
+                    <ul className="space-y-3 mb-8">
+                      {arm.offerings.slice(0, 3).map(f => (
+                        <li key={f} className="text-sm font-medium text-helix-accent/50 flex items-start gap-3" >
+                          <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 bg-[#0066cc]" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <span className="inline-flex items-center gap-2 text-sm font-bold text-[#83e7ee] transition-colors" >
+                      Learn More
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
-
-                  <div className="mb-6">
-                    <p className="text-xs font-mono tracking-[0.25em] text-white/30 uppercase mb-2">{arm.subtitle}</p>
-                    <h4 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: 'Sora, sans-serif' }}>
-                      {arm.title}
-                    </h4>
-                  </div>
-
-                  <p className="text-white/45 mb-7 leading-relaxed text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                    {arm.description}
-                  </p>
-
-                  <ul className="space-y-2.5 mb-8">
-                    {arm.offerings.slice(0, 3).map(f => (
-                      <li key={f} className="text-xs text-white/35 flex items-center gap-2.5" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                        <span className="w-1 h-1 rounded-full bg-white/20 flex-shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ph-purple-light/70 group-hover:text-ph-purple-light transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                    Learn More
-                    <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                  </span>
-                </div>
-              </motion.button>
-            )
-          })}
+                </motion.button>
+              )
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Modal */}
       <AnimatePresence>
         {activeArm && (
           <ArmModal arm={activeArm} onClose={() => setActiveArm(null)} />

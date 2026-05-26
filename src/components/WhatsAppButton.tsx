@@ -16,11 +16,11 @@ export default function WhatsAppButton() {
       title="Chat with us on WhatsApp"
     >
       <div className="relative w-14 h-14 rounded-full flex items-center justify-center wa-pulse shadow-lg shadow-ph-purple/20"
-        style={{ background: 'linear-gradient(135deg, #7C3AED, #4C1D95)' }}>
+        style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)' }}>
         <MessageCircle size={26} className="text-white fill-white" />
       </div>
       {/* Tooltip */}
-      <span className="absolute right-16 top-1/2 -translate-y-1/2 bg-black/90 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 pointer-events-none" style={{ fontFamily: 'Sora, sans-serif' }}>
+      <span className="absolute right-16 top-1/2 -translate-y-1/2 bg-helix-blue-dark/90 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 pointer-events-none" >
         Chat with us now
       </span>
     </motion.a>

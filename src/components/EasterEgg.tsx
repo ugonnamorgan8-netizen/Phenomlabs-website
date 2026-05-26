@@ -9,7 +9,7 @@ export default function EasterEgg() {
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string }[]>([])
 
   const fireParticles = useCallback(() => {
-    const cols = ['#7c3aed', '#a78bfa', '#4c1d95', '#8b5cf6', '#c4b5fd']
+    const cols = ['#83e7ee', '#83e7ee', '#0a121c', '#0066cc', '#e0f7fa']
     const newParticles = Array.from({ length: 60 }, (_, i) => ({
       id: Date.now() + i,
       x: Math.random() * 100,
@@ -58,7 +58,7 @@ export default function EasterEgg() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             className="fixed top-24 left-1/2 -translate-x-1/2 z-[99991] px-8 py-4 rounded-2xl glass border border-ph-purple/40 text-center shadow-2xl"
-            style={{ boxShadow: '0 0 40px rgba(124,58,237,0.4)' }}
+            style={{ boxShadow: '0 0 40px rgba(131,231,238,0.4)' }}
           >
             <p className="font-display font-bold text-2xl gradient-text">⚡ PHENOM MODE ACTIVATED ⚡</p>
             <p className="text-white/60 text-sm mt-1">Africa's AI Company says hello 👋</p>

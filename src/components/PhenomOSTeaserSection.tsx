@@ -24,10 +24,10 @@ export default function PhenomOSTeaserSection() {
   }, [inView])
 
   return (
-    <section ref={ref} className="py-32 relative overflow-hidden bg-black">
+    <section ref={ref} className="py-32 relative overflow-hidden bg-helix-blue-dark">
       {/* Purple orb instead of gold */}
       <div className="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full opacity-5 blur-[120px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)' }} />
+        style={{ background: 'radial-gradient(circle, #83e7ee 0%, transparent 70%)' }} />
       <div className="grid-pattern absolute inset-0 opacity-15" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -44,12 +44,12 @@ export default function PhenomOSTeaserSection() {
             </div>
 
             <h2 className="text-5xl sm:text-6xl font-bold text-white mb-7 leading-[1.05]"
-              style={{ fontFamily: 'Sora, sans-serif', letterSpacing: '-0.025em' }}>
+              >
               The Digital <br />
               <span className="gradient-text-purple">COO of Africa.</span>
             </h2>
 
-            <p className="text-white/45 text-lg leading-relaxed mb-10 max-w-md" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <p className="text-white/45 text-lg leading-relaxed mb-10 max-w-md" >
               39.6 million Nigerian businesses deserve a smart manager. PHENOM OS is that manager — powered by AI, available on WhatsApp, and built for scale.
             </p>
 
@@ -59,22 +59,22 @@ export default function PhenomOSTeaserSection() {
                   <Smartphone size={15} />
                   <span className="text-[10px] font-mono uppercase tracking-widest font-semibold">WhatsApp Native</span>
                 </div>
-                <p className="text-white/28 text-xs leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>No apps to download. Control everything through chat.</p>
+                <p className="text-white/28 text-xs leading-relaxed" >No apps to download. Control everything through chat.</p>
               </div>
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-ph-purple-light">
                   <Sparkles size={15} />
                   <span className="text-[10px] font-mono uppercase tracking-widest font-semibold">Real-time Insights</span>
                 </div>
-                <p className="text-white/28 text-xs leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>Know your numbers instantly, anytime, anywhere.</p>
+                <p className="text-white/28 text-xs leading-relaxed" >Know your numbers instantly, anytime, anywhere.</p>
               </div>
             </div>
 
             <Link
               to="/phenom-os"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white transition-all"
-              style={{ background: 'linear-gradient(135deg, #7c3aed, #6d28d9)', fontFamily: 'DM Sans, sans-serif' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.45)' }}
+              style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)', fontFamily: 'DM Sans, sans-serif' }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(131,231,238,0.45)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none' }}
             >
               Join the Waitlist
@@ -90,16 +90,16 @@ export default function PhenomOSTeaserSection() {
           >
             {/* Phone Shell */}
             <div className="relative mx-auto w-[300px] h-[600px] bg-[#080808] rounded-[2.8rem] p-3 border border-white/10 ring-1 ring-white/5"
-              style={{ boxShadow: '0 0 80px rgba(124,58,237,0.08)' }}>
+              style={{ boxShadow: '0 0 80px rgba(131,231,238,0.08)' }}>
               <div className="w-full h-full bg-[#0d0d0d] rounded-[2.3rem] overflow-hidden flex flex-col relative">
                 {/* Header */}
                 <div className="bg-[#111] p-5 border-b border-white/5 flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(124,58,237,0.18)' }}>
+                    style={{ background: 'rgba(131,231,238,0.18)' }}>
                     <span className="text-ph-purple-light font-bold text-sm">P</span>
                   </div>
                   <div>
-                    <h4 className="text-white text-sm font-bold" style={{ fontFamily: 'Sora, sans-serif' }}>PHENOM OS</h4>
+                    <h4 className="text-white text-sm font-bold" >PHENOM OS</h4>
                     <p className="text-[9px] text-emerald-400 uppercase tracking-widest font-semibold">Active</p>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function PhenomOSTeaserSection() {
                           msg.from === 'user'
                             ? 'text-white rounded-tr-none'
                             : 'bg-white/5 text-white/75 rounded-tl-none border border-white/5'
-                        }`} style={msg.from === 'user' ? { background: 'linear-gradient(135deg, #7c3aed, #6d28d9)', fontFamily: 'DM Sans, sans-serif' } : { fontFamily: 'DM Sans, sans-serif' }}>
+                        }`} style={msg.from === 'user' ? { background: 'linear-gradient(135deg, #83e7ee, #0066cc)', fontFamily: 'DM Sans, sans-serif' } : { fontFamily: 'DM Sans, sans-serif' }}>
                           {msg.text}
                         </div>
                       </motion.div>

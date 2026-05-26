@@ -33,7 +33,7 @@ function FooterLink({ item }: { item: FooterLink }) {
         target="_blank"
         rel="noopener noreferrer"
         className="text-sm text-white/45 hover:text-white transition-colors flex items-center gap-1 group"
-        style={{ fontFamily: 'DM Sans, sans-serif' }}
+        
       >
         {item.label}
         <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -60,7 +60,7 @@ function FooterLink({ item }: { item: FooterLink }) {
       href={item.path + (item.hash ? '#' + item.hash : '')}
       onClick={handleClick}
       className="text-sm text-white/45 hover:text-white transition-colors flex items-center gap-1 group cursor-pointer"
-      style={{ fontFamily: 'DM Sans, sans-serif' }}
+      
     >
       {item.label}
       <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -70,7 +70,7 @@ function FooterLink({ item }: { item: FooterLink }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-black pt-28 pb-10 border-t border-white/5 relative overflow-hidden">
+    <footer className="bg-helix-blue-dark pt-28 pb-10 border-t border-white/5 relative overflow-hidden">
       {/* Top fade line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ph-purple/20 to-transparent" />
 
@@ -84,13 +84,13 @@ export default function Footer() {
                 <PhenomLogo className="w-6 h-6" />
               </div>
               <div className="flex flex-col">
-                <span className="text-base font-bold tracking-tight text-white" style={{ fontFamily: 'Sora, sans-serif' }}>
+                <span className="text-base font-bold tracking-tight text-white" >
                   Phenom <span className="text-ph-purple-light">Labs</span>
                 </span>
                 <span className="text-[9px] font-mono tracking-[0.25em] text-white/25 uppercase -mt-0.5">Digital Intelligence</span>
               </div>
             </a>
-            <p className="text-white/40 text-base leading-relaxed mb-8 max-w-xs" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <p className="text-white/40 text-base leading-relaxed mb-8 max-w-xs" >
               Architecting the future of African business through tactical AI and intelligent automation.
             </p>
             <div className="flex items-center gap-3">
@@ -131,11 +131,11 @@ export default function Footer() {
             <div className="space-y-5">
               <div className="flex flex-col">
                 <span className="text-[9px] font-mono uppercase tracking-widest text-ph-purple-light/70 mb-1">Email</span>
-                <a href="mailto:ugonnamorgan8@gmail.com" className="text-white font-semibold tracking-tight hover:text-ph-purple-light transition-colors text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>ugonnamorgan8@gmail.com</a>
+                <a href="mailto:ugonnamorgan8@gmail.com" className="text-white font-semibold tracking-tight hover:text-ph-purple-light transition-colors text-sm" >ugonnamorgan8@gmail.com</a>
               </div>
               <div className="flex flex-col">
                 <span className="text-[9px] font-mono uppercase tracking-widest text-ph-purple-light/70 mb-1">Location</span>
-                <span className="text-white font-semibold tracking-tight text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>Awka, Nigeria</span>
+                <span className="text-white font-semibold tracking-tight text-sm" >Awka, Nigeria</span>
               </div>
             </div>
           </div>

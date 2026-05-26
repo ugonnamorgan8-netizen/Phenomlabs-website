@@ -34,7 +34,7 @@ export default function ContactPage() {
             className="w-full h-full opacity-30 bg-[url('/assets/africa_ai_network.png')] bg-cover bg-center mix-blend-screen grayscale"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(0,102,204,0.1) 0%, transparent 70%)' }} />
         </div>
         <div className="dot-grid absolute inset-0 opacity-15 z-0 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -190,7 +190,7 @@ export default function ContactPage() {
                 ) : (
                   <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
                     <div className="w-20 h-20 rounded-full mx-auto mb-8 flex items-center justify-center shadow-2xl shadow-ph-purple/30"
-                      style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+                      style={{ background: 'linear-gradient(135deg, #83e7ee, #0066cc)' }}>
                       <Check size={32} className="text-white" />
                     </div>
                     <h3 className="font-display font-bold text-white text-3xl mb-4" style={{ fontFamily: 'Sora, sans-serif' }}>Message Sent!</h3>
