@@ -57,7 +57,7 @@ export default function HeroSection() {
       {/* Subtle purple radial at top-center */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.08]"
-          style={{ background: 'radial-gradient(ellipse at 50% 0%, #7c3aed 0%, transparent 65%)', filter: 'blur(40px)' }} />
+          style={{ background: 'radial-gradient(ellipse at 50% 0%, #0066cc 0%, transparent 65%)', filter: 'blur(40px)' }} />
         <div className="aurora-1 absolute inset-0" />
         <div className="aurora-2 absolute inset-0" />
         <div className="dot-grid absolute inset-0 opacity-30" />
@@ -143,7 +143,7 @@ export default function HeroSection() {
         {/* RIGHT — 3D Sphere */}
         <div className="w-full lg:w-2/5 h-64 sm:h-80 lg:h-[580px] relative">
           <div className="absolute inset-0 rounded-full pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)' }} />
+            style={{ background: 'radial-gradient(circle, rgba(131,231,238,0.08) 0%, transparent 70%)' }} />
           <NeuralNetwork3D mouse={mouseRef} scrollProgress={scrollProgress} />
         </div>
       </div>
