@@ -118,7 +118,7 @@ export default function IndustriesSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1, duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="bg-white/5 backdrop-blur-md rounded-3xl border border-helix-stroke hover:border-helix-cyan/40 transition-all duration-500 group overflow-hidden shadow-xl shadow-black/10"
+                className="bg-white/5 backdrop-blur-md rounded-3xl border border-helix-cyan/30 hover:border-helix-cyan/40 transition-all duration-500 group overflow-hidden shadow-xl shadow-black/10"
               >
                 <div className="p-8 lg:p-10">
                   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:items-start">

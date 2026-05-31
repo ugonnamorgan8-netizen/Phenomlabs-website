@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import HeroSection from '../components/HeroSection'
+
+import HeroCinematic from '../components/HeroCinematic'
 import StatsMarqueeSection from '../components/StatsMarqueeSection'
 import ProductsEcosystemSection from '../components/ProductsEcosystemSection'
 import IndustriesSection from '../components/IndustriesSection'
@@ -30,48 +31,54 @@ export default function HomePage() {
   }, [hash])
 
   return (
-    <main>
-      {/* ── Hero ── */}
-      <HeroSection />
+    <main className="bg-[#0a121c]">
 
-      {/* ── Stats & Marquee ── */}
-      <StatsMarqueeSection />
+      {/* ── Cinematic Scroll Hero ── */}
+      <HeroCinematic />
 
-      {/* ── Products Ecosystem ── NEW */}
-      <ProductsEcosystemSection />
+      {/* ── Page Body ──────────────────────────────────────────────────── */}
+      {/* Sitting naturally in the document flow so it never overlaps the cinematic end */}
+      <div className="relative z-10 bg-[#0a121c]">
 
-      {/* ── Industries We Serve (deep-dive) ── NEW */}
-      <IndustriesSection />
+        {/* ── Stats & Marquee ── */}
+        <StatsMarqueeSection />
 
-      {/* ── PHENOM Core (Learn · Build · Automate) ── */}
-      <ThreeArmsSection />
+        {/* ── Products Ecosystem ── */}
+        <ProductsEcosystemSection />
 
-      {/* ── Learning & Training ── NEW */}
-      <LearningSection />
+        {/* ── Industries We Serve ── */}
+        <IndustriesSection />
 
-      {/* ── Research & Innovation Lab ── NEW */}
-      <ResearchLabSection />
+        {/* ── PHENOM Core (Learn · Build · Automate) ── */}
+        <ThreeArmsSection />
 
-      {/* ── Case Studies ── */}
-      <ProjectsSection />
+        {/* ── Learning & Training ── */}
+        <LearningSection />
 
-      {/* ── Build Logs ── NEW */}
-      <BuildLogsSection />
+        {/* ── Research & Innovation Lab ── */}
+        <ResearchLabSection />
 
-      {/* ── Demo Hub ── NEW */}
-      <DemoHubSection />
+        {/* ── Case Studies ── */}
+        <ProjectsSection />
 
-      {/* ── Why Us ── */}
-      <WhyUsSection />
+        {/* ── Build Logs ── */}
+        <BuildLogsSection />
 
-      {/* ── PHENOM OS Teaser ── */}
-      <PhenomOSTeaserSection />
+        {/* ── Demo Hub ── */}
+        <DemoHubSection />
 
-      {/* ── Testimonials ── */}
-      <TestimonialsSection />
+        {/* ── Why Us ── */}
+        <WhyUsSection />
 
-      {/* ── CTA Banner ── */}
-      <CTABannerSection />
+        {/* ── PHENOM OS Teaser ── */}
+        <PhenomOSTeaserSection />
+
+        {/* ── Testimonials ── */}
+        <TestimonialsSection />
+
+        {/* ── CTA Banner ── */}
+        <CTABannerSection />
+      </div>
     </main>
   )
 }
