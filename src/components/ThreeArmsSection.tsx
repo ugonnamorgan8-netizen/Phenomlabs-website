@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { BookOpen, Code, Cpu, X, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -141,12 +142,12 @@ type Arm = typeof arms[0]
 
 function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
   const Icon = arm.icon
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-[#0a121c]/80 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#0a121c]/80 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -228,7 +229,8 @@ function ArmModal({ arm, onClose }: { arm: Arm; onClose: () => void }) {
           </Link>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }
 
