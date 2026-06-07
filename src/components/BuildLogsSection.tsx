@@ -72,7 +72,7 @@ export default function BuildLogsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-10">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 gap-10">
           <div className="max-w-2xl">
             <motion.span
               initial={{ opacity: 0, y: 10 }}

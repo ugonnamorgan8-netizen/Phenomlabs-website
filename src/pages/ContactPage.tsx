@@ -6,18 +6,34 @@ const services = ['AI Literacy Training', 'Prompt Engineering Workshop', 'Python
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', org: '', service: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'succeeded' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setLoading(true)
-    await new Promise(r => setTimeout(r, 1500))
-    setLoading(false)
-    setSubmitted(true)
+    setStatus('submitting')
+    try {
+      const formData = new FormData(e.currentTarget)
+      const response = await fetch('https://formspree.io/f/mqeopnnp', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
+      })
+      if (response.ok) {
+        setStatus('succeeded')
+        setForm({ name: '', email: '', org: '', service: '', message: '' })
+      } else {
+        setStatus('error')
+        alert('There was a problem submitting your form. Please try again.')
+      }
+    } catch (error) {
+      setStatus('error')
+      alert('There was a problem submitting your form. Please try again.')
+    }
   }
 
   const { scrollYProgress } = useScroll()
@@ -127,7 +143,7 @@ export default function ContactPage() {
               <div className="glass rounded-[2rem] p-10 border border-white/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-ph-purple/5 blur-[50px] pointer-events-none" />
                 
-                {!submitted ? (
+                {!status.includes('succeeded') ? (
                   <>
                     <h2 className="font-display text-3xl font-bold text-white mb-10" style={{ fontFamily: 'Sora, sans-serif' }}>Send Us a Message</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -175,9 +191,9 @@ export default function ContactPage() {
                           className="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-ph-purple/50 transition-all duration-300 resize-none" />
                       </div>
 
-                      <button type="submit" disabled={loading}
+                      <button type="submit" disabled={status === 'submitting'}
                         className="w-full py-5 rounded-2xl font-bold text-white text-sm transition-all duration-300 hover:scale-[1.01] relative overflow-hidden disabled:opacity-60 shadow-xl shadow-ph-purple/20 bg-gradient-to-r from-ph-purple to-ph-violet">
-                        {loading ? (
+                        {status === 'submitting' ? (
                           <span className="flex items-center justify-center gap-3">
                             <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
                               className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full" />

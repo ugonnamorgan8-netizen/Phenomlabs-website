@@ -10,7 +10,7 @@ const projects = [
     impact: '98% Time Saved',
     year: '2026',
     image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=1000',
-    link: 'https://dssp-automation-production.up.railway.app/'
+    link: 'https://coachmorgan-dssp-automation.hf.space/'
   },
   {
     title: 'Lab EMR Clinical Deployment',
@@ -42,8 +42,8 @@ export default function ProjectsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-10">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 gap-10">
+          <div className="max-w-2xl w-full text-left">
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}

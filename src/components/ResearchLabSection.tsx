@@ -84,8 +84,8 @@ export default function ResearchLabSection() {
             <FlaskConical size={14} className="text-helix-cyan" />
             Research & Innovation Lab
           </motion.span>
-          <div className="flex flex-col lg:flex-row items-end justify-between gap-10">
-            <div>
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 w-full">
+            <div className="w-full lg:w-auto text-left">
               <motion.h2
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}

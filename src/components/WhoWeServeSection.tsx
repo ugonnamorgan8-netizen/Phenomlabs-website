@@ -38,8 +38,8 @@ export default function WhoWeServeSection() {
   return (
     <section className="py-24 bg-helix-blue-dark relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-8">
+          <div className="max-w-2xl w-full text-left">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -13,7 +13,6 @@ import ContactPage from './pages/ContactPage'
 // Global Components
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CustomCursor from './components/CustomCursor'
 import LoadingScreen from './components/LoadingScreen'
 import WhatsAppButton from './components/WhatsAppButton'
 import ScrollToTop from './components/ScrollToTop'
@@ -72,7 +71,6 @@ function App() {
       <ScrollToTopOnRoute />
       <div className="noise-overlay" />
       <TechBackground />
-      <CustomCursor />
       <EasterEgg />
       {loading ? (
         <LoadingScreen onComplete={() => setLoading(false)} />

@@ -33,7 +33,7 @@ const demos = [
     typeColor: '#83e7ee',
     platforms: ['web'],
     ctaLabel: 'Launch DSSP App',
-    ctaLink: 'https://dssp-automation-production.up.railway.app/',
+    ctaLink: 'https://coachmorgan-dssp-automation.hf.space/',
     secondaryCtaLabel: 'Marvel Driving School Website',
     secondaryCtaLink: 'https://marveldrivingschoolng.lovable.app/',
     isLive: true,
